@@ -392,7 +392,7 @@ app.post('/webhook', handler, (req: SquareWebhookRequest, res) => {
 
 > `SquareWebhookRequest` extends a **minimal structural** request type (so the
 > package carries no Express dependency in its published types — see
-> [#128](https://github.com/mbates/squareup/issues/128)). It exposes `body`,
+> [#128](https://github.com/Bates-Solutions/squareup/issues/128)). It exposes `body`,
 > `headers`, `on`, `rawBody`, and `squareEvent`. If your downstream handler also
 > needs Express extras like `req.params`, `req.query`, or `req.get(...)`, type the
 > parameter as an intersection with the real Express request:

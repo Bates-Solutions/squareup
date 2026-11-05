@@ -6,7 +6,7 @@
 
 # Interface: ListGiftCardActivitiesOptions
 
-Defined in: [core/services/gift-cards.service.ts:212](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L212)
+Defined in: [core/services/gift-cards.service.ts:212](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L212)
 
 Options for listing gift card activities.
 
@@ -16,7 +16,7 @@ Options for listing gift card activities.
 
 > `optional` **beginTime?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:216](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L216)
+Defined in: [core/services/gift-cards.service.ts:216](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L216)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/services/gift-cards.service.ts:216](https://github.com/mbates/
 
 > `optional` **cursor?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:219](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L219)
+Defined in: [core/services/gift-cards.service.ts:219](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L219)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/services/gift-cards.service.ts:219](https://github.com/mbates/
 
 > `optional` **endTime?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:217](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L217)
+Defined in: [core/services/gift-cards.service.ts:217](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L217)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/services/gift-cards.service.ts:217](https://github.com/mbates/
 
 > `optional` **giftCardId?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:213](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L213)
+Defined in: [core/services/gift-cards.service.ts:213](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L213)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/services/gift-cards.service.ts:213](https://github.com/mbates/
 
 > `optional` **limit?**: `number`
 
-Defined in: [core/services/gift-cards.service.ts:218](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L218)
+Defined in: [core/services/gift-cards.service.ts:218](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L218)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [core/services/gift-cards.service.ts:218](https://github.com/mbates/
 
 > `optional` **locationId?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:215](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L215)
+Defined in: [core/services/gift-cards.service.ts:215](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L215)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [core/services/gift-cards.service.ts:215](https://github.com/mbates/
 
 > `optional` **sortOrder?**: `"DESC"` \| `"ASC"`
 
-Defined in: [core/services/gift-cards.service.ts:220](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L220)
+Defined in: [core/services/gift-cards.service.ts:220](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L220)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [core/services/gift-cards.service.ts:220](https://github.com/mbates/
 
 > `optional` **type?**: [`GiftCardActivityType`](../type-aliases/GiftCardActivityType.md)
 
-Defined in: [core/services/gift-cards.service.ts:214](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L214)
+Defined in: [core/services/gift-cards.service.ts:214](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L214)

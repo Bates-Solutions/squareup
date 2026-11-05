@@ -6,7 +6,7 @@
 
 # Interface: Money
 
-Defined in: [core/utils.ts:7](https://github.com/mbates/squareup/blob/main/src/core/utils.ts#L7)
+Defined in: [core/utils.ts:7](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L7)
 
 Money representation
 
@@ -16,7 +16,7 @@ Money representation
 
 > **amount**: `bigint`
 
-Defined in: [core/utils.ts:8](https://github.com/mbates/squareup/blob/main/src/core/utils.ts#L8)
+Defined in: [core/utils.ts:8](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L8)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [core/utils.ts:8](https://github.com/mbates/squareup/blob/main/src/c
 
 > **currency**: `"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"`
 
-Defined in: [core/utils.ts:9](https://github.com/mbates/squareup/blob/main/src/core/utils.ts#L9)
+Defined in: [core/utils.ts:9](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L9)

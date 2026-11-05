@@ -6,7 +6,7 @@
 
 # Interface: WebhookEventContext
 
-Defined in: [server/middleware/lambda.ts:33](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L33)
+Defined in: [server/middleware/lambda.ts:33](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L33)
 
 Context passed to Lambda webhook handlers with auto-extracted entity IDs
 
@@ -16,7 +16,7 @@ Context passed to Lambda webhook handlers with auto-extracted entity IDs
 
 > `optional` **customerId?**: `string`
 
-Defined in: [server/middleware/lambda.ts:36](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L36)
+Defined in: [server/middleware/lambda.ts:36](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L36)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [server/middleware/lambda.ts:36](https://github.com/mbates/squareup/
 
 > `optional` **orderId?**: `string`
 
-Defined in: [server/middleware/lambda.ts:35](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L35)
+Defined in: [server/middleware/lambda.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L35)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [server/middleware/lambda.ts:35](https://github.com/mbates/squareup/
 
 > `optional` **paymentId?**: `string`
 
-Defined in: [server/middleware/lambda.ts:34](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L34)
+Defined in: [server/middleware/lambda.ts:34](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L34)

@@ -8,7 +8,7 @@
 
 > **getCustomerId**(`event`): `string` \| `undefined`
 
-Defined in: [server/webhook.ts:279](https://github.com/mbates/squareup/blob/main/src/server/webhook.ts#L279)
+Defined in: [server/webhook.ts:279](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L279)
 
 Extract the customer ID from a webhook event
 

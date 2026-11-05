@@ -14,7 +14,7 @@ import type { WebhookConfig, WebhookEvent } from '../types.js';
  * `express` here would make the generated declaration file reach back into
  * untranspiled TypeScript source in the JSR npm tarball, breaking every
  * `/server` consumer — including ones that never touch Express (see
- * [#128](https://github.com/mbates/squareup/issues/128)). The sibling Next.js
+ * [#128](https://github.com/Bates-Solutions/squareup/issues/128)). The sibling Next.js
  * and Lambda middleware already declare their own local types for the same
  * reason. These interfaces are structurally compatible with Express 4 and 5, so
  * `createExpressWebhookHandler(...)` still drops straight into

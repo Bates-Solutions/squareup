@@ -6,7 +6,7 @@
 
 # Interface: AdjustIncrementActivityDetails
 
-Defined in: [core/services/gift-cards.service.ts:140](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L140)
+Defined in: [core/services/gift-cards.service.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L140)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [core/services/gift-cards.service.ts:140](https://github.com/mbates/
 
 > **amountMoney**: `object`
 
-Defined in: [core/services/gift-cards.service.ts:141](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L141)
+Defined in: [core/services/gift-cards.service.ts:141](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L141)
 
 #### amount
 
@@ -30,4 +30,4 @@ Defined in: [core/services/gift-cards.service.ts:141](https://github.com/mbates/
 
 > **reason**: [`AdjustIncrementReason`](../type-aliases/AdjustIncrementReason.md)
 
-Defined in: [core/services/gift-cards.service.ts:142](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L142)
+Defined in: [core/services/gift-cards.service.ts:142](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L142)

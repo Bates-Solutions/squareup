@@ -6,7 +6,7 @@
 
 # Interface: ListWebhookSubscriptionsOptions
 
-Defined in: [core/services/webhook-subscriptions.service.ts:58](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L58)
+Defined in: [core/services/webhook-subscriptions.service.ts:58](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L58)
 
 Options for listing webhook subscriptions.
 
@@ -16,7 +16,7 @@ Options for listing webhook subscriptions.
 
 > `optional` **cursor?**: `string`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:59](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L59)
+Defined in: [core/services/webhook-subscriptions.service.ts:59](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L59)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/services/webhook-subscriptions.service.ts:59](https://github.c
 
 > `optional` **includeDisabled?**: `boolean`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:61](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L61)
+Defined in: [core/services/webhook-subscriptions.service.ts:61](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L61)
 
 Include disabled subscriptions (default only returns enabled)
 
@@ -34,7 +34,7 @@ Include disabled subscriptions (default only returns enabled)
 
 > `optional` **limit?**: `number`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:63](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L63)
+Defined in: [core/services/webhook-subscriptions.service.ts:63](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L63)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [core/services/webhook-subscriptions.service.ts:63](https://github.c
 
 > `optional` **sortOrder?**: `"DESC"` \| `"ASC"`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:62](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L62)
+Defined in: [core/services/webhook-subscriptions.service.ts:62](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L62)

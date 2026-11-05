@@ -8,6 +8,6 @@
 
 > **OrderDiscountScope** = `"ORDER"` \| `"LINE_ITEM"`
 
-Defined in: [core/types/index.ts:131](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L131)
+Defined in: [core/types/index.ts:131](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L131)
 
 Whether a discount applies to the whole order or to specific line items.

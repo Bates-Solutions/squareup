@@ -8,7 +8,7 @@
 
 > **OrderWebhookEvent** = [`WebhookEvent`](../interfaces/WebhookEvent.md)\<[`OrderWebhookObject`](../interfaces/OrderWebhookObject.md)\> & `object`
 
-Defined in: [server/types.ts:212](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L212)
+Defined in: [server/types.ts:212](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L212)
 
 ## Type Declaration
 

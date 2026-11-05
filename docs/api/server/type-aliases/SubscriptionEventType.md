@@ -8,4 +8,4 @@
 
 > **SubscriptionEventType** = `"subscription.created"` \| `"subscription.updated"`
 
-Defined in: [server/types.ts:26](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L26)
+Defined in: [server/types.ts:26](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L26)

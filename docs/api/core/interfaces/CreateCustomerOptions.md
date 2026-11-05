@@ -6,7 +6,7 @@
 
 # Interface: CreateCustomerOptions
 
-Defined in: [core/services/customers.service.ts:36](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L36)
+Defined in: [core/services/customers.service.ts:36](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L36)
 
 Options for creating a customer
 
@@ -16,7 +16,7 @@ Options for creating a customer
 
 > `optional` **address?**: `object`
 
-Defined in: [core/services/customers.service.ts:45](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L45)
+Defined in: [core/services/customers.service.ts:45](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L45)
 
 #### addressLine1?
 
@@ -48,7 +48,7 @@ Defined in: [core/services/customers.service.ts:45](https://github.com/mbates/sq
 
 > `optional` **companyName?**: `string`
 
-Defined in: [core/services/customers.service.ts:41](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L41)
+Defined in: [core/services/customers.service.ts:41](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L41)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [core/services/customers.service.ts:41](https://github.com/mbates/sq
 
 > `optional` **emailAddress?**: `string`
 
-Defined in: [core/services/customers.service.ts:39](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L39)
+Defined in: [core/services/customers.service.ts:39](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L39)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [core/services/customers.service.ts:39](https://github.com/mbates/sq
 
 > `optional` **familyName?**: `string`
 
-Defined in: [core/services/customers.service.ts:38](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L38)
+Defined in: [core/services/customers.service.ts:38](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L38)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [core/services/customers.service.ts:38](https://github.com/mbates/sq
 
 > `optional` **givenName?**: `string`
 
-Defined in: [core/services/customers.service.ts:37](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L37)
+Defined in: [core/services/customers.service.ts:37](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L37)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [core/services/customers.service.ts:37](https://github.com/mbates/sq
 
 > `optional` **idempotencyKey?**: `string`
 
-Defined in: [core/services/customers.service.ts:53](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L53)
+Defined in: [core/services/customers.service.ts:53](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L53)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [core/services/customers.service.ts:53](https://github.com/mbates/sq
 
 > `optional` **nickname?**: `string`
 
-Defined in: [core/services/customers.service.ts:42](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L42)
+Defined in: [core/services/customers.service.ts:42](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L42)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [core/services/customers.service.ts:42](https://github.com/mbates/sq
 
 > `optional` **note?**: `string`
 
-Defined in: [core/services/customers.service.ts:43](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L43)
+Defined in: [core/services/customers.service.ts:43](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L43)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [core/services/customers.service.ts:43](https://github.com/mbates/sq
 
 > `optional` **phoneNumber?**: `string`
 
-Defined in: [core/services/customers.service.ts:40](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L40)
+Defined in: [core/services/customers.service.ts:40](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L40)
 
 ***
 
@@ -112,4 +112,4 @@ Defined in: [core/services/customers.service.ts:40](https://github.com/mbates/sq
 
 > `optional` **referenceId?**: `string`
 
-Defined in: [core/services/customers.service.ts:44](https://github.com/mbates/squareup/blob/main/src/core/services/customers.service.ts#L44)
+Defined in: [core/services/customers.service.ts:44](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customers.service.ts#L44)

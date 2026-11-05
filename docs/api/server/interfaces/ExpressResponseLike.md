@@ -6,7 +6,7 @@
 
 # Interface: ExpressResponseLike
 
-Defined in: [server/middleware/express.ts:33](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L33)
+Defined in: [server/middleware/express.ts:33](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L33)
 
 Minimal structural stand-in for the Express `Response` methods used here.
 
@@ -16,7 +16,7 @@ Minimal structural stand-in for the Express `Response` methods used here.
 
 > **json**(`body`): `ExpressResponseLike`
 
-Defined in: [server/middleware/express.ts:35](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L35)
+Defined in: [server/middleware/express.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L35)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [server/middleware/express.ts:35](https://github.com/mbates/squareup
 
 > **status**(`code`): `ExpressResponseLike`
 
-Defined in: [server/middleware/express.ts:34](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L34)
+Defined in: [server/middleware/express.ts:34](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L34)
 
 #### Parameters
 
