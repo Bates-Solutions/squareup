@@ -139,9 +139,34 @@ describe('createWebhookHandler (edge)', () => {
     expect(res.status).toBe(401);
   });
 
+  it.each([
+    ['a missing signature', undefined, 'Missing signature header'],
+    ['a wrong signature', 'd3Jvbmctc2lnbmF0dXJl', 'Invalid signature'],
+  ])(
+    'verifies before parsing: a non-JSON body with %s gets 401, not 500',
+    async (_label, signature, error) => {
+      const handler = vi.fn();
+      const webhook = createWebhookHandler({
+        signatureKey: KEY,
+        notificationUrl: URL_,
+        handlers: { 'payment.updated': handler },
+      });
+
+      const res = await webhook(request('not json', signature));
+
+      expect(res.status).toBe(401);
+      expect(await res.json()).toEqual({ error });
+      expect(handler).not.toHaveBeenCalled();
+    }
+  );
+
   it('returns 500 when the body is not JSON', async () => {
     const body = 'not json';
-    const webhook = createWebhookHandler({ signatureKey: KEY, notificationUrl: URL_, handlers: {} });
+    const webhook = createWebhookHandler({
+      signatureKey: KEY,
+      notificationUrl: URL_,
+      handlers: {},
+    });
 
     const res = await webhook(request(body, await sign(body)));
 
@@ -198,9 +223,10 @@ describe('createWebhookHandler (edge)', () => {
       ].map((m) => m[1]);
       for (const spec of specifiers) {
         const bare = spec.split('/')[0];
-        expect(spec.startsWith('node:') || builtins.has(bare), `${url.pathname} imports ${spec}`).toBe(
-          false
-        );
+        expect(
+          spec.startsWith('node:') || builtins.has(bare),
+          `${url.pathname} imports ${spec}`
+        ).toBe(false);
         if (spec.startsWith('.')) {
           visit(new URL(spec.replace(/\.js$/, '.ts'), url));
         }

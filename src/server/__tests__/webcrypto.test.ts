@@ -40,7 +40,9 @@ describe('verifySignatureAsync', () => {
   });
 
   it('accepts a valid signature without a notification URL', async () => {
-    expect(await verifySignatureAsync(BODY, nodeSignature(BODY, KEY), KEY)).toEqual({ valid: true });
+    expect(await verifySignatureAsync(BODY, nodeSignature(BODY, KEY), KEY)).toEqual({
+      valid: true,
+    });
   });
 
   it('accepts a valid signature with a notification URL', async () => {
@@ -154,7 +156,9 @@ describe('verifySignatureAsync', () => {
   it('handles non-ASCII bodies and keys as UTF-8', async () => {
     const body = JSON.stringify({ note: 'café ☕' });
     const key = 'clé';
-    expect(await verifySignatureAsync(body, nodeSignature(body, key), key)).toEqual({ valid: true });
+    expect(await verifySignatureAsync(body, nodeSignature(body, key), key)).toEqual({
+      valid: true,
+    });
   });
 
   it('agrees with the synchronous verifySignature on valid and invalid inputs', async () => {
