@@ -237,7 +237,7 @@ export const handler = createLambdaWebhookHandler({
 | `orders`         | Create and manage orders, incl. DRAFT templates for subscriptions, fulfillment updates and cancelling |
 | `customers`      | Customer management                                            |
 | `customerGroups` | Customer groups + group membership (gates pricing rules)       |
-| `catalog`        | Product catalog ops, incl. pricing rules and wholesale pricing |
+| `catalog`        | Product catalog ops, incl. pricing rules, wholesale pricing and UPC/SKU lookup |
 | `inventory`      | Stock counts, adjustments and transfers between locations      |
 | `subscriptions`  | Subscription management, incl. phases backed by order templates |
 | `invoices`       | Invoice operations                                             |
