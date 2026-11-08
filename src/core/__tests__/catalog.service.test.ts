@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { SquareClient } from 'square';
 import { CatalogService, type CatalogObject } from '../services/catalog.service.js';
-import { SquareValidationError } from '../errors.js';
+import { SquareError, SquareValidationError } from '../errors.js';
 
 // Create mock Square client
 function createMockClient(overrides: Record<string, unknown> = {}): SquareClient {
@@ -636,6 +636,22 @@ describe('CatalogService', () => {
       const service = new CatalogService(client);
 
       await expect(service.findVariationsByCode({ upcs: ['1'] })).rejects.toThrow();
+    });
+
+    it('throws when a later page answers 2xx with errors', async () => {
+      const client = createMockClient({
+        search: vi
+          .fn()
+          .mockResolvedValueOnce({ objects: [variation('VAR_1', 'ITEM_1')], cursor: 'NEXT' })
+          .mockResolvedValueOnce({
+            objects: [],
+            errors: [{ category: 'API_ERROR', code: 'INTERNAL_SERVER_ERROR' }],
+          }),
+      });
+      const service = new CatalogService(client);
+
+      await expect(service.findVariationsByCode({ skus: ['A'] })).rejects.toThrow(SquareError);
+      expect(searchOf(client)).toHaveBeenCalledTimes(2);
     });
   });
 
