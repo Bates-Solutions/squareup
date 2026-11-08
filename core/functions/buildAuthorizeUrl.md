@@ -30,7 +30,7 @@ const url = buildAuthorizeUrl({
   clientId: process.env.SQUARE_APP_ID!,
   environment: 'production',
   scopes: ['ORDERS_READ', 'MERCHANT_PROFILE_READ'],
-  state: csrfToken,
+  state: csrfToken, // random per attempt; store it server side to check in the callback
 });
 // redirect the seller to `url`
 ```
