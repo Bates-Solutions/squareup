@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.3.0**](../README.md)
+[**@bates-solutions/squareup API Reference v2.4.0**](../README.md)
 
 ***
 
@@ -72,6 +72,8 @@ const payment = await square.payments.create({
 - [CreateSubscriptionOptions](interfaces/CreateSubscriptionOptions.md)
 - [CreateWebhookSubscriptionOptions](interfaces/CreateWebhookSubscriptionOptions.md)
 - [Customer](interfaces/Customer.md)
+- [FindVariationsByCodeOptions](interfaces/FindVariationsByCodeOptions.md)
+- [FindVariationsByCodeResult](interfaces/FindVariationsByCodeResult.md)
 - [GiftCard](interfaces/GiftCard.md)
 - [GiftCardActivity](interfaces/GiftCardActivity.md)
 - [LineItemInput](interfaces/LineItemInput.md)
@@ -100,6 +102,8 @@ const payment = await square.payments.create({
 - [SubscriptionPhaseInput](interfaces/SubscriptionPhaseInput.md)
 - [SubscriptionPlan](interfaces/SubscriptionPlan.md)
 - [UpdateCustomerOptions](interfaces/UpdateCustomerOptions.md)
+- [UpdateOrderFulfillmentInput](interfaces/UpdateOrderFulfillmentInput.md)
+- [UpdateOrderOptions](interfaces/UpdateOrderOptions.md)
 - [UpdateWebhookSubscriptionOptions](interfaces/UpdateWebhookSubscriptionOptions.md)
 
 ## Type Aliases
