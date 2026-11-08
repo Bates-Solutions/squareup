@@ -300,7 +300,7 @@ const order = await square.orders.get('ORDER_123');
 const updated = await square.orders.update('ORDER_123', {
   version: order.version!, // Required for concurrency control
   referenceId: 'new-reference',
-  idempotencyKey: 'order-123-ref-update', // optional; reuse it on retry
+  idempotencyKey: 'order-123-ref-update', // optional; reuse it only to resend this exact request
 });
 ```
 
@@ -337,6 +337,7 @@ Writable shipment fields: `carrier`, `shippingType`, `shippingNote`, `trackingNu
 await square.orders.update('ORDER_123', { version: order.version!, state: 'CANCELED' });
 
 // Remove a field, by Square dot path
+const uid = order.fulfillments![0].uid!;
 await square.orders.update('ORDER_123', {
   version: order.version!,
   fieldsToClear: [`fulfillments[${uid}].shipment_details.tracking_url`],
