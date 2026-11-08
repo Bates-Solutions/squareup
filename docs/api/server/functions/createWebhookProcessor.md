@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.4.0**](../../README.md)
+[**@bates-solutions/squareup API Reference v2.5.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createWebhookProcessor**(`config`): (`rawBody`, `signature`) => `Promise`\<\{ `error?`: `string`; `event?`: [`WebhookEvent`](../interfaces/WebhookEvent.md)\<`unknown`\>; `success`: `boolean`; \}\>
 
-Defined in: [server/webhook.ts:207](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L207)
+Defined in: [server/webhook.ts:155](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L155)
 
 Create a webhook handler function that verifies and processes events
 
