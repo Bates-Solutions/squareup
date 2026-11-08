@@ -839,6 +839,10 @@ export class CatalogService {
    * Find item variations by UPC (barcode) or SKU, without listing the whole
    * catalog. Pages through every match, and returns the parent items too.
    *
+   * Codes are matched exactly, not normalized: a UPC-A `012345678905` won't
+   * find the same barcode stored as EAN-13 `0012345678905`. Pass both forms if
+   * the catalog may hold either.
+   *
    * @param options - UPCs and/or SKUs to match (exact, case insensitive)
    * @returns The matching variations and their parent items
    *

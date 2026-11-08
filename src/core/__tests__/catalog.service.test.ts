@@ -582,8 +582,15 @@ describe('CatalogService', () => {
       const client = createMockClient({
         search: vi
           .fn()
-          .mockResolvedValueOnce({ objects: [variation('VAR_1', 'ITEM_1')], cursor: 'NEXT' })
-          .mockResolvedValueOnce({ objects: [variation('VAR_2', 'ITEM_2')] }),
+          .mockResolvedValueOnce({
+            objects: [variation('VAR_1', 'ITEM_1')],
+            relatedObjects: [item('ITEM_1')],
+            cursor: 'NEXT',
+          })
+          .mockResolvedValueOnce({
+            objects: [variation('VAR_2', 'ITEM_2')],
+            relatedObjects: [item('ITEM_2')],
+          }),
       });
       const service = new CatalogService(client);
 
@@ -592,6 +599,8 @@ describe('CatalogService', () => {
       expect(searchOf(client)).toHaveBeenCalledTimes(2);
       expect(searchOf(client).mock.calls[1][0]).toMatchObject({ cursor: 'NEXT' });
       expect(result.variations.map((v) => v.id)).toEqual(['VAR_1', 'VAR_2']);
+      // Parent items come from every page, not only the first.
+      expect(result.items.map((i) => i.id)).toEqual(['ITEM_1', 'ITEM_2']);
     });
 
     it('sends at most 250 values per search', async () => {

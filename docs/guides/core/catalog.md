@@ -146,6 +146,8 @@ for (const v of variations) {
 
 Give at least one code; blanks and repeats are dropped. Long lists are sent 250 values per request, Square's limit. A variation matched by both its UPC and its SKU appears once.
 
+Codes are not normalized: the match is exact, so a 12-digit UPC-A like `012345678905` won't find a variation saved as the 13-digit EAN `0012345678905` or as a GTIN-14. If the catalog may hold either form, pass both.
+
 ### Get All Categories
 
 ```typescript
