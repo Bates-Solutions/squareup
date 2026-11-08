@@ -6,7 +6,7 @@
 
 # Class: OrdersService
 
-Defined in: [core/services/orders.service.ts:30](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L30)
+Defined in: [core/services/orders.service.ts:30](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L30)
 
 Orders service for managing Square orders
 
@@ -32,7 +32,7 @@ const order = await square.orders.create({
 
 > **new OrdersService**(`client`, `defaultLocationId?`, `defaultCurrency?`): `OrdersService`
 
-Defined in: [core/services/orders.service.ts:31](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L31)
+Defined in: [core/services/orders.service.ts:31](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L31)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [core/services/orders.service.ts:31](https://github.com/mbates/squar
 
 ##### defaultCurrency?
 
-`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"`
+`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"` = `'USD'`
 
 #### Returns
 
@@ -58,7 +58,7 @@ Defined in: [core/services/orders.service.ts:31](https://github.com/mbates/squar
 
 > **builder**(`locationId?`): [`OrderBuilder`](OrderBuilder.md)
 
-Defined in: [core/services/orders.service.ts:53](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L53)
+Defined in: [core/services/orders.service.ts:53](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L53)
 
 Create a new order builder
 
@@ -93,7 +93,7 @@ const order = await square.orders
 
 > **create**(`options`, `locationId?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:82](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L82)
+Defined in: [core/services/orders.service.ts:82](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L82)
 
 Create an order directly (without builder)
 
@@ -135,7 +135,7 @@ const order = await square.orders.create({
 
 > **get**(`orderId`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:140](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L140)
+Defined in: [core/services/orders.service.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L140)
 
 Get an order by ID
 
@@ -165,7 +165,7 @@ const order = await square.orders.get('ORDER_123');
 
 > **pay**(`orderId`, `paymentIds`, `options?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:215](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L215)
+Defined in: [core/services/orders.service.ts:215](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L215)
 
 Pay for an order
 
@@ -209,7 +209,7 @@ const order = await square.orders.pay('ORDER_123', ['PAYMENT_456']);
 
 > **search**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`Order`](../interfaces/Order.md)[]; \}\>
 
-Defined in: [core/services/orders.service.ts:278](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L278)
+Defined in: [core/services/orders.service.ts:278](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L278)
 
 Search for orders
 
@@ -268,7 +268,7 @@ const { data } = await square.orders.search({
 
 > **searchRecent**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`Order`](../interfaces/Order.md)[]; \}\>
 
-Defined in: [core/services/orders.service.ts:333](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L333)
+Defined in: [core/services/orders.service.ts:333](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L333)
 
 Search for recent orders with simplified filter options
 
@@ -317,7 +317,7 @@ const page2 = await square.orders.searchRecent({
 
 > **update**(`orderId`, `updates`, `locationId?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:163](https://github.com/mbates/squareup/blob/main/src/core/services/orders.service.ts#L163)
+Defined in: [core/services/orders.service.ts:163](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L163)
 
 Update an order
 

@@ -6,7 +6,7 @@
 
 # Interface: SubscriptionPhaseInput
 
-Defined in: [core/services/subscriptions.service.ts:88](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L88)
+Defined in: [core/services/subscriptions.service.ts:88](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L88)
 
 A subscription phase that bills from an order template.
 
@@ -21,7 +21,7 @@ pricing rules (e.g. customer-group wholesale tiers) at calculation time.
 
 > **orderTemplateId**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:99](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L99)
+Defined in: [core/services/subscriptions.service.ts:99](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L99)
 
 ID of a DRAFT order created via `square.orders.create(...)` that defines
 what ships each billing cycle.
@@ -32,7 +32,7 @@ what ships each billing cycle.
 
 > `optional` **ordinal?**: `number` \| `bigint`
 
-Defined in: [core/services/subscriptions.service.ts:94](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L94)
+Defined in: [core/services/subscriptions.service.ts:94](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L94)
 
 Position of this phase in the subscription's phase sequence. Defaults to
 array position when omitted. Accepts a number or bigint — coerced to

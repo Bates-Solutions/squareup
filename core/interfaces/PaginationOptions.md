@@ -6,7 +6,7 @@
 
 # Interface: PaginationOptions
 
-Defined in: [core/types/index.ts:33](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L33)
+Defined in: [core/types/index.ts:33](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L33)
 
 Common pagination options
 
@@ -16,7 +16,7 @@ Common pagination options
 
 > `optional` **cursor?**: `string`
 
-Defined in: [core/types/index.ts:34](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L34)
+Defined in: [core/types/index.ts:34](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L34)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [core/types/index.ts:34](https://github.com/mbates/squareup/blob/mai
 
 > `optional` **limit?**: `number`
 
-Defined in: [core/types/index.ts:35](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L35)
+Defined in: [core/types/index.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L35)

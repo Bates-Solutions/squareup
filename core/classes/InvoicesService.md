@@ -6,7 +6,7 @@
 
 # Class: InvoicesService
 
-Defined in: [core/services/invoices.service.ts:145](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L145)
+Defined in: [core/services/invoices.service.ts:145](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L145)
 
 Invoices service for managing Square invoices
 
@@ -32,7 +32,7 @@ await square.invoices.publish(invoice.id, invoice.version);
 
 > **new InvoicesService**(`client`, `defaultLocationId?`, `defaultCurrency?`): `InvoicesService`
 
-Defined in: [core/services/invoices.service.ts:146](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L146)
+Defined in: [core/services/invoices.service.ts:146](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L146)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [core/services/invoices.service.ts:146](https://github.com/mbates/sq
 
 ##### defaultCurrency?
 
-`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"`
+`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"` = `'USD'`
 
 #### Returns
 
@@ -58,7 +58,7 @@ Defined in: [core/services/invoices.service.ts:146](https://github.com/mbates/sq
 
 > **cancel**(`invoiceId`, `version`): `Promise`\<`Invoice`\>
 
-Defined in: [core/services/invoices.service.ts:330](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L330)
+Defined in: [core/services/invoices.service.ts:330](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L330)
 
 Cancel an invoice
 
@@ -94,7 +94,7 @@ const invoice = await square.invoices.cancel('INV_123', 1);
 
 > **create**(`options`): `Promise`\<`Invoice`\>
 
-Defined in: [core/services/invoices.service.ts:172](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L172)
+Defined in: [core/services/invoices.service.ts:172](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L172)
 
 Create a draft invoice
 
@@ -133,7 +133,7 @@ const invoice = await square.invoices.create({
 
 > **delete**(`invoiceId`, `version`): `Promise`\<`void`\>
 
-Defined in: [core/services/invoices.service.ts:426](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L426)
+Defined in: [core/services/invoices.service.ts:426](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L426)
 
 Delete a draft invoice
 
@@ -167,7 +167,7 @@ await square.invoices.delete('INV_123', 0);
 
 > **get**(`invoiceId`): `Promise`\<`Invoice`\>
 
-Defined in: [core/services/invoices.service.ts:266](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L266)
+Defined in: [core/services/invoices.service.ts:266](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L266)
 
 Get an invoice by ID
 
@@ -197,7 +197,7 @@ const invoice = await square.invoices.get('INV_123');
 
 > **publish**(`invoiceId`, `version`, `options?`): `Promise`\<`Invoice`\>
 
-Defined in: [core/services/invoices.service.ts:295](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L295)
+Defined in: [core/services/invoices.service.ts:295](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L295)
 
 Publish (send) an invoice
 
@@ -242,7 +242,7 @@ console.log(`Invoice sent: ${invoice.publicUrl}`);
 
 > **search**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: `Invoice`[]; \}\>
 
-Defined in: [core/services/invoices.service.ts:447](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L447)
+Defined in: [core/services/invoices.service.ts:447](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L447)
 
 Search for invoices
 
@@ -288,7 +288,7 @@ const results = await square.invoices.search({
 
 > **update**(`invoiceId`, `version`, `options`): `Promise`\<`Invoice`\>
 
-Defined in: [core/services/invoices.service.ts:363](https://github.com/mbates/squareup/blob/main/src/core/services/invoices.service.ts#L363)
+Defined in: [core/services/invoices.service.ts:363](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/invoices.service.ts#L363)
 
 Update an invoice
 

@@ -8,4 +8,4 @@
 
 > **OrderEventType** = `"order.created"` \| `"order.updated"` \| `"order.fulfillment.updated"`
 
-Defined in: [server/types.ts:14](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L14)
+Defined in: [server/types.ts:14](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L14)

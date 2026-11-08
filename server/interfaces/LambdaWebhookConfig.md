@@ -6,7 +6,7 @@
 
 # Interface: LambdaWebhookConfig
 
-Defined in: [server/middleware/lambda.ts:70](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L70)
+Defined in: [server/middleware/lambda.ts:70](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L70)
 
 Configuration for Lambda webhook handling
 
@@ -16,7 +16,7 @@ Configuration for Lambda webhook handling
 
 > `optional` **corsHeaders?**: `Record`\<`string`, `string`\>
 
-Defined in: [server/middleware/lambda.ts:78](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L78)
+Defined in: [server/middleware/lambda.ts:78](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L78)
 
 Custom CORS headers (merged with defaults)
 
@@ -26,7 +26,7 @@ Custom CORS headers (merged with defaults)
 
 > **handlers**: [`LambdaWebhookHandlers`](../type-aliases/LambdaWebhookHandlers.md)
 
-Defined in: [server/middleware/lambda.ts:74](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L74)
+Defined in: [server/middleware/lambda.ts:74](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L74)
 
 Event handlers by type
 
@@ -36,7 +36,7 @@ Event handlers by type
 
 > `optional` **logger?**: `false` \| [`WebhookLogger`](WebhookLogger.md)
 
-Defined in: [server/middleware/lambda.ts:80](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L80)
+Defined in: [server/middleware/lambda.ts:80](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L80)
 
 Logger instance (defaults to console)
 
@@ -46,7 +46,7 @@ Logger instance (defaults to console)
 
 > `optional` **notificationUrl?**: `string`
 
-Defined in: [server/middleware/lambda.ts:76](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L76)
+Defined in: [server/middleware/lambda.ts:76](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L76)
 
 URL where webhooks are received (for signature verification)
 
@@ -56,7 +56,7 @@ URL where webhooks are received (for signature verification)
 
 > `optional` **onUnhandledEvent?**: (`event`, `context`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [server/middleware/lambda.ts:82](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L82)
+Defined in: [server/middleware/lambda.ts:82](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L82)
 
 Callback for events with no registered handler
 
@@ -80,6 +80,6 @@ Callback for events with no registered handler
 
 > **signatureKey**: `string`
 
-Defined in: [server/middleware/lambda.ts:72](https://github.com/mbates/squareup/blob/main/src/server/middleware/lambda.ts#L72)
+Defined in: [server/middleware/lambda.ts:72](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/lambda.ts#L72)
 
 Square webhook signature key

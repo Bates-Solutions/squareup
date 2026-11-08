@@ -6,7 +6,7 @@
 
 # Class: GiftCardsService
 
-Defined in: [core/services/gift-cards.service.ts:391](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L391)
+Defined in: [core/services/gift-cards.service.ts:391](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L391)
 
 Service for managing Square gift cards — issuance, lookup, customer linking.
 
@@ -29,7 +29,7 @@ await square.giftCards.activate(card.id!, 2500);
 
 > **new GiftCardsService**(`client`, `defaultLocationId?`, `defaultCurrency?`): `GiftCardsService`
 
-Defined in: [core/services/gift-cards.service.ts:394](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L394)
+Defined in: [core/services/gift-cards.service.ts:394](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L394)
 
 #### Parameters
 
@@ -43,7 +43,7 @@ Defined in: [core/services/gift-cards.service.ts:394](https://github.com/mbates/
 
 ##### defaultCurrency?
 
-`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"`
+`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"` = `'USD'`
 
 #### Returns
 
@@ -55,7 +55,7 @@ Defined in: [core/services/gift-cards.service.ts:394](https://github.com/mbates/
 
 > `readonly` **activities**: [`GiftCardActivitiesService`](GiftCardActivitiesService.md)
 
-Defined in: [core/services/gift-cards.service.ts:392](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L392)
+Defined in: [core/services/gift-cards.service.ts:392](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L392)
 
 ## Methods
 
@@ -63,7 +63,7 @@ Defined in: [core/services/gift-cards.service.ts:392](https://github.com/mbates/
 
 > **activate**(`giftCardId`, `amount`, `options?`): `Promise`\<[`GiftCardActivity`](../interfaces/GiftCardActivity.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:596](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L596)
+Defined in: [core/services/gift-cards.service.ts:596](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L596)
 
 Activate a `PENDING` gift card with an initial balance. Convenience
 wrapper over `activities.create({ type: 'ACTIVATE' })`.
@@ -114,7 +114,7 @@ wrapper over `activities.create({ type: 'ACTIVATE' })`.
 
 > **create**(`options`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:409](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L409)
+Defined in: [core/services/gift-cards.service.ts:409](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L409)
 
 Create (issue) a new gift card.
 
@@ -138,7 +138,7 @@ before redemption.
 
 > **deactivate**(`giftCardId`, `reason?`, `options?`): `Promise`\<[`GiftCardActivity`](../interfaces/GiftCardActivity.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:683](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L683)
+Defined in: [core/services/gift-cards.service.ts:683](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L683)
 
 Deactivate a gift card permanently.
 
@@ -172,7 +172,7 @@ Deactivate a gift card permanently.
 
 > **get**(`giftCardId`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:448](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L448)
+Defined in: [core/services/gift-cards.service.ts:448](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L448)
 
 Get a gift card by ID.
 
@@ -192,7 +192,7 @@ Get a gift card by ID.
 
 > **getFromGan**(`gan`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:466](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L466)
+Defined in: [core/services/gift-cards.service.ts:466](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L466)
 
 Get a gift card by GAN (gift card account number).
 
@@ -212,7 +212,7 @@ Get a gift card by GAN (gift card account number).
 
 > **getFromNonce**(`nonce`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:485](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L485)
+Defined in: [core/services/gift-cards.service.ts:485](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L485)
 
 Get a gift card from a payment-source nonce (e.g. produced by the
 Square Web Payments SDK at checkout).
@@ -233,7 +233,7 @@ Square Web Payments SDK at checkout).
 
 > **linkCustomer**(`giftCardId`, `customerId`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:539](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L539)
+Defined in: [core/services/gift-cards.service.ts:539](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L539)
 
 Link a gift card to a customer profile. Returns the updated card with the
 customer ID added to `customerIds`.
@@ -258,7 +258,7 @@ customer ID added to `customerIds`.
 
 > **list**(`options?`): `Promise`\<\{ `cursor?`: `string`; `giftCards`: [`GiftCard`](../interfaces/GiftCard.md)[]; \}\>
 
-Defined in: [core/services/gift-cards.service.ts:503](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L503)
+Defined in: [core/services/gift-cards.service.ts:503](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L503)
 
 List gift cards, optionally filtered by type, state, or linked customer.
 
@@ -278,7 +278,7 @@ List gift cards, optionally filtered by type, state, or linked customer.
 
 > **load**(`giftCardId`, `amount`, `options?`): `Promise`\<[`GiftCardActivity`](../interfaces/GiftCardActivity.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:625](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L625)
+Defined in: [core/services/gift-cards.service.ts:625](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L625)
 
 Load (top up) an active gift card.
 
@@ -328,7 +328,7 @@ Load (top up) an active gift card.
 
 > **redeem**(`giftCardId`, `amount`, `options?`): `Promise`\<[`GiftCardActivity`](../interfaces/GiftCardActivity.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:656](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L656)
+Defined in: [core/services/gift-cards.service.ts:656](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L656)
 
 Redeem from a gift card (deduct funds). For payments processed through
 the Square Payments API, Square creates the REDEEM activity automatically;
@@ -376,7 +376,7 @@ use this only with a custom payment processor.
 
 > **search**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`GiftCard`](../interfaces/GiftCard.md)[]; \}\>
 
-Defined in: [core/services/gift-cards.service.ts:528](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L528)
+Defined in: [core/services/gift-cards.service.ts:528](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L528)
 
 Alias for `list()`. Maintained for parity with the issue's proposed shape.
 
@@ -396,7 +396,7 @@ Alias for `list()`. Maintained for parity with the issue's proposed shape.
 
 > **unlinkCustomer**(`giftCardId`, `customerId`): `Promise`\<[`GiftCard`](../interfaces/GiftCard.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:567](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L567)
+Defined in: [core/services/gift-cards.service.ts:567](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L567)
 
 Unlink a customer from a gift card. Returns the updated card.
 

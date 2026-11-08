@@ -8,7 +8,7 @@
 
 > **CreatedWebhookSubscription** = `Square.WebhookSubscription` & `object`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:19](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L19)
+Defined in: [core/services/webhook-subscriptions.service.ts:19](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L19)
 
 A webhook subscription as returned by `create`, where `signatureKey` is
 present and must be persisted immediately — it is never returned again.

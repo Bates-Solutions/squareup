@@ -8,7 +8,7 @@
 
 > **formatMoney**(`cents`, `currency?`, `locale?`): `string`
 
-Defined in: [core/utils.ts:79](https://github.com/mbates/squareup/blob/main/src/core/utils.ts#L79)
+Defined in: [core/utils.ts:79](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L79)
 
 Format money for display
 
@@ -22,7 +22,7 @@ Amount in smallest currency unit
 
 ### currency?
 
-`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"`
+`"USD"` \| `"CAD"` \| `"GBP"` \| `"EUR"` \| `"AUD"` \| `"JPY"` = `'USD'`
 
 Currency code (default: USD)
 

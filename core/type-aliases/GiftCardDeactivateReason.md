@@ -8,6 +8,6 @@
 
 > **GiftCardDeactivateReason** = `"SUSPICIOUS_ACTIVITY"` \| `"UNKNOWN_REASON"` \| `"CHARGEBACK_DEACTIVATE"`
 
-Defined in: [core/services/gift-cards.service.ts:72](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L72)
+Defined in: [core/services/gift-cards.service.ts:72](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L72)
 
 Reason a gift card was deactivated.

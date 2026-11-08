@@ -6,7 +6,7 @@
 
 # Class: WebhookSubscriptionsService
 
-Defined in: [core/services/webhook-subscriptions.service.ts:84](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L84)
+Defined in: [core/services/webhook-subscriptions.service.ts:84](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L84)
 
 Manage Square webhook subscriptions (create / list / get / update / delete /
 test / rotate signature key). Exposed as `square.webhooks.subscriptions`.
@@ -32,7 +32,7 @@ created.signatureKey; // present here ONLY — persist it now
 
 > **new WebhookSubscriptionsService**(`client`): `WebhookSubscriptionsService`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:85](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L85)
+Defined in: [core/services/webhook-subscriptions.service.ts:85](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L85)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [core/services/webhook-subscriptions.service.ts:85](https://github.c
 
 > **create**(`options`): `Promise`\<[`CreatedWebhookSubscription`](../type-aliases/CreatedWebhookSubscription.md)\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:95](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L95)
+Defined in: [core/services/webhook-subscriptions.service.ts:95](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L95)
 
 Create a webhook subscription.
 
@@ -77,7 +77,7 @@ When required fields are missing
 
 > **delete**(`subscriptionId`): `Promise`\<`void`\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:205](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L205)
+Defined in: [core/services/webhook-subscriptions.service.ts:205](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L205)
 
 Delete a webhook subscription.
 
@@ -97,7 +97,7 @@ Delete a webhook subscription.
 
 > **get**(`subscriptionId`): `Promise`\<[`WebhookSubscription`](../type-aliases/WebhookSubscription.md)\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:158](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L158)
+Defined in: [core/services/webhook-subscriptions.service.ts:158](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L158)
 
 Get a webhook subscription by ID. The result never includes `signatureKey`.
 
@@ -117,7 +117,7 @@ Get a webhook subscription by ID. The result never includes `signatureKey`.
 
 > **list**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`WebhookSubscription`](../type-aliases/WebhookSubscription.md)[]; \}\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:133](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L133)
+Defined in: [core/services/webhook-subscriptions.service.ts:133](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L133)
 
 List webhook subscriptions with cursor-based pagination.
 
@@ -137,7 +137,7 @@ List webhook subscriptions with cursor-based pagination.
 
 > **rotateSignatureKey**(`subscriptionId`, `options?`): `Promise`\<\{ `signatureKey?`: `string`; \}\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:253](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L253)
+Defined in: [core/services/webhook-subscriptions.service.ts:253](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L253)
 
 Rotate a subscription's signature key, returning a **new** key.
 
@@ -168,7 +168,7 @@ before Square signs the next delivery with it.
 
 > **test**(`subscriptionId`, `options?`): `Promise`\<`SubscriptionTestResult`\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:219](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L219)
+Defined in: [core/services/webhook-subscriptions.service.ts:219](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L219)
 
 Send a test event to a subscription to verify the endpoint.
 
@@ -198,7 +198,7 @@ Optional specific event type to send
 
 > **update**(`subscriptionId`, `options`): `Promise`\<[`WebhookSubscription`](../type-aliases/WebhookSubscription.md)\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:176](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L176)
+Defined in: [core/services/webhook-subscriptions.service.ts:176](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L176)
 
 Update a webhook subscription (name, URL, event set, or enabled state).
 

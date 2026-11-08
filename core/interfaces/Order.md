@@ -6,7 +6,7 @@
 
 # Interface: Order
 
-Defined in: [core/builders/order.builder.ts:44](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L44)
+Defined in: [core/builders/order.builder.ts:44](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L44)
 
 Order type from Square API
 
@@ -16,7 +16,7 @@ Order type from Square API
 
 > `optional` **createdAt?**: `string`
 
-Defined in: [core/builders/order.builder.ts:57](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L57)
+Defined in: [core/builders/order.builder.ts:57](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L57)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/builders/order.builder.ts:57](https://github.com/mbates/square
 
 > `optional` **customerId?**: `string`
 
-Defined in: [core/builders/order.builder.ts:48](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L48)
+Defined in: [core/builders/order.builder.ts:48](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L48)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/builders/order.builder.ts:48](https://github.com/mbates/square
 
 > `optional` **id?**: `string`
 
-Defined in: [core/builders/order.builder.ts:45](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L45)
+Defined in: [core/builders/order.builder.ts:45](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L45)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/builders/order.builder.ts:45](https://github.com/mbates/square
 
 > `optional` **lineItems?**: `OrderLineItem`[]
 
-Defined in: [core/builders/order.builder.ts:49](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L49)
+Defined in: [core/builders/order.builder.ts:49](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L49)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/builders/order.builder.ts:49](https://github.com/mbates/square
 
 > `optional` **locationId?**: `string`
 
-Defined in: [core/builders/order.builder.ts:46](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L46)
+Defined in: [core/builders/order.builder.ts:46](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L46)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [core/builders/order.builder.ts:46](https://github.com/mbates/square
 
 > `optional` **pricingOptions?**: [`OrderPricingOptions`](OrderPricingOptions.md)
 
-Defined in: [core/builders/order.builder.ts:50](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L50)
+Defined in: [core/builders/order.builder.ts:50](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L50)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [core/builders/order.builder.ts:50](https://github.com/mbates/square
 
 > `optional` **referenceId?**: `string`
 
-Defined in: [core/builders/order.builder.ts:47](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L47)
+Defined in: [core/builders/order.builder.ts:47](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L47)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [core/builders/order.builder.ts:47](https://github.com/mbates/square
 
 > `optional` **state?**: `string`
 
-Defined in: [core/builders/order.builder.ts:55](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L55)
+Defined in: [core/builders/order.builder.ts:55](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L55)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [core/builders/order.builder.ts:55](https://github.com/mbates/square
 
 > `optional` **totalMoney?**: `object`
 
-Defined in: [core/builders/order.builder.ts:51](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L51)
+Defined in: [core/builders/order.builder.ts:51](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L51)
 
 #### amount?
 
@@ -96,7 +96,7 @@ Defined in: [core/builders/order.builder.ts:51](https://github.com/mbates/square
 
 > `optional` **updatedAt?**: `string`
 
-Defined in: [core/builders/order.builder.ts:58](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L58)
+Defined in: [core/builders/order.builder.ts:58](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L58)
 
 ***
 
@@ -104,4 +104,4 @@ Defined in: [core/builders/order.builder.ts:58](https://github.com/mbates/square
 
 > `optional` **version?**: `number`
 
-Defined in: [core/builders/order.builder.ts:56](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L56)
+Defined in: [core/builders/order.builder.ts:56](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L56)

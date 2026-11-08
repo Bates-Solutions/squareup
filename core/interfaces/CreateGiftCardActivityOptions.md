@@ -6,7 +6,7 @@
 
 # Interface: CreateGiftCardActivityOptions
 
-Defined in: [core/services/gift-cards.service.ts:190](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L190)
+Defined in: [core/services/gift-cards.service.ts:190](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L190)
 
 Options for creating a gift card activity.
 
@@ -20,7 +20,7 @@ Provide the corresponding `*ActivityDetails` field for the chosen `type`
 
 > `optional` **activateActivityDetails?**: [`ActivateActivityDetails`](ActivateActivityDetails.md)
 
-Defined in: [core/services/gift-cards.service.ts:199](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L199)
+Defined in: [core/services/gift-cards.service.ts:199](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L199)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [core/services/gift-cards.service.ts:199](https://github.com/mbates/
 
 > `optional` **adjustDecrementActivityDetails?**: [`AdjustDecrementActivityDetails`](AdjustDecrementActivityDetails.md)
 
-Defined in: [core/services/gift-cards.service.ts:205](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L205)
+Defined in: [core/services/gift-cards.service.ts:205](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L205)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [core/services/gift-cards.service.ts:205](https://github.com/mbates/
 
 > `optional` **adjustIncrementActivityDetails?**: [`AdjustIncrementActivityDetails`](AdjustIncrementActivityDetails.md)
 
-Defined in: [core/services/gift-cards.service.ts:204](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L204)
+Defined in: [core/services/gift-cards.service.ts:204](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L204)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [core/services/gift-cards.service.ts:204](https://github.com/mbates/
 
 > `optional` **clearBalanceActivityDetails?**: `object`
 
-Defined in: [core/services/gift-cards.service.ts:202](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L202)
+Defined in: [core/services/gift-cards.service.ts:202](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L202)
 
 #### reason?
 
@@ -56,7 +56,7 @@ Defined in: [core/services/gift-cards.service.ts:202](https://github.com/mbates/
 
 > `optional` **deactivateActivityDetails?**: `object`
 
-Defined in: [core/services/gift-cards.service.ts:203](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L203)
+Defined in: [core/services/gift-cards.service.ts:203](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L203)
 
 #### reason?
 
@@ -68,7 +68,7 @@ Defined in: [core/services/gift-cards.service.ts:203](https://github.com/mbates/
 
 > `optional` **giftCardGan?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:198](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L198)
+Defined in: [core/services/gift-cards.service.ts:198](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L198)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [core/services/gift-cards.service.ts:198](https://github.com/mbates/
 
 > `optional` **giftCardId?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:197](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L197)
+Defined in: [core/services/gift-cards.service.ts:197](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L197)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [core/services/gift-cards.service.ts:197](https://github.com/mbates/
 
 > `optional` **idempotencyKey?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:206](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L206)
+Defined in: [core/services/gift-cards.service.ts:206](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L206)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [core/services/gift-cards.service.ts:206](https://github.com/mbates/
 
 > `optional` **loadActivityDetails?**: [`LoadActivityDetails`](LoadActivityDetails.md)
 
-Defined in: [core/services/gift-cards.service.ts:200](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L200)
+Defined in: [core/services/gift-cards.service.ts:200](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L200)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [core/services/gift-cards.service.ts:200](https://github.com/mbates/
 
 > `optional` **locationId?**: `string`
 
-Defined in: [core/services/gift-cards.service.ts:196](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L196)
+Defined in: [core/services/gift-cards.service.ts:196](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L196)
 
 Location where the activity occurred. Defaults to the client's configured
 location ID.
@@ -111,7 +111,7 @@ location ID.
 
 > `optional` **redeemActivityDetails?**: [`RedeemActivityDetails`](RedeemActivityDetails.md)
 
-Defined in: [core/services/gift-cards.service.ts:201](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L201)
+Defined in: [core/services/gift-cards.service.ts:201](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L201)
 
 ***
 
@@ -119,4 +119,4 @@ Defined in: [core/services/gift-cards.service.ts:201](https://github.com/mbates/
 
 > **type**: [`GiftCardActivityType`](../type-aliases/GiftCardActivityType.md)
 
-Defined in: [core/services/gift-cards.service.ts:191](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L191)
+Defined in: [core/services/gift-cards.service.ts:191](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L191)
