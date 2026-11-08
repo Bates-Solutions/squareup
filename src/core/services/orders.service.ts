@@ -4,10 +4,18 @@ import type {
   CurrencyCode,
   SearchOrdersOptions,
   SearchRecentOrdersOptions,
+  UpdateOrderOptions,
 } from '../types/index.js';
 import { assertNoResponseErrors, parseSquareError, SquareValidationError } from '../errors.js';
 import { createIdempotencyKey } from '../utils.js';
 import { OrderBuilder, type Order } from '../builders/order.builder.js';
+
+/** A copy without the undefined keys, so a sparse update sends only what was set. */
+function compact<T extends object>(value: T): T {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, v]) => v !== undefined)
+  ) as T;
+}
 
 /**
  * Orders service for managing Square orders
@@ -153,20 +161,37 @@ export class OrdersService {
   }
 
   /**
-   * Update an order
+   * Update an order. Only the fields you set are sent (a sparse update), so
+   * everything else on the order is left as it is.
    *
    * @param orderId - Order ID to update
-   * @param updates - Update fields. Pass `idempotencyKey` and reuse it when
-   *   retrying so Square deduplicates the request.
+   * @param updates - The order's current `version`, and the fields to change.
+   *   Pass `idempotencyKey` and reuse it when retrying so Square deduplicates
+   *   the request.
+   * @param locationId - Override the client's default location
    * @returns Updated order
+   *
+   * @example
+   * ```typescript
+   * const order = await square.orders.get('ORDER_123');
+   *
+   * // Mark a shipment shipped, with tracking
+   * await square.orders.update('ORDER_123', {
+   *   version: order.version!,
+   *   fulfillments: [{
+   *     uid: order.fulfillments![0].uid!,
+   *     state: 'COMPLETED',
+   *     shipmentDetails: { carrier: 'Canada Post', trackingNumber: '1234567890' },
+   *   }],
+   * });
+   *
+   * // Cancel an order
+   * await square.orders.update('ORDER_123', { version: order.version!, state: 'CANCELED' });
+   * ```
    */
   async update(
     orderId: string,
-    updates: {
-      version: number;
-      referenceId?: string;
-      idempotencyKey?: string;
-    },
+    updates: UpdateOrderOptions,
     locationId?: string
   ): Promise<Order> {
     const location = locationId ?? this.defaultLocationId;
@@ -176,15 +201,37 @@ export class OrdersService {
         'locationId'
       );
     }
+    if (!Number.isInteger(updates.version) || updates.version < 0) {
+      throw new SquareValidationError(
+        "version must be the order's current version, a non-negative integer",
+        'version'
+      );
+    }
+    const fulfillments = updates.fulfillments?.map((f, i) => {
+      if (!(f.uid as string | undefined)?.trim()) {
+        throw new SquareValidationError(
+          'Each fulfillment needs the uid of a fulfillment on the order',
+          `fulfillments[${String(i)}].uid`
+        );
+      }
+      return compact({
+        uid: f.uid,
+        state: f.state,
+        shipmentDetails: f.shipmentDetails ? compact({ ...f.shipmentDetails }) : undefined,
+      });
+    });
 
     try {
       const response = await this.client.orders.update({
         orderId,
-        order: {
+        order: compact({
           locationId: location,
           version: updates.version,
           referenceId: updates.referenceId,
-        },
+          state: updates.state,
+          fulfillments,
+        }),
+        ...(updates.fieldsToClear?.length ? { fieldsToClear: updates.fieldsToClear } : {}),
         idempotencyKey: updates.idempotencyKey ?? createIdempotencyKey(),
       });
       assertNoResponseErrors(response);

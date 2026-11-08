@@ -185,6 +185,52 @@ export interface CreateOrderOptions {
 }
 
 /**
+ * One fulfillment to change in `orders.update()`, matched on its `uid`.
+ *
+ * Moving a `SHIPMENT` fulfillment to `COMPLETED` marks it shipped; Square stamps
+ * `shipmentDetails.shippedAt` itself, so it isn't settable here.
+ */
+export interface UpdateOrderFulfillmentInput {
+  /** The `uid` of a fulfillment already on the order. */
+  uid: string;
+  state?: import('square').FulfillmentState;
+  /** Writable shipment fields; only the ones you set are sent. */
+  shipmentDetails?: {
+    carrier?: string;
+    shippingType?: string;
+    shippingNote?: string;
+    trackingNumber?: string;
+    trackingUrl?: string;
+    /** RFC 3339 timestamp. */
+    expectedShippedAt?: string;
+  };
+}
+
+/**
+ * Options for `orders.update()`. Square applies them as a sparse update: only
+ * the fields you set change.
+ */
+export interface UpdateOrderOptions {
+  /**
+   * The order's current version. Square rejects a stale one, which is how a
+   * concurrent change is detected.
+   */
+  version: number;
+  referenceId?: string;
+  /** Order state, e.g. `'CANCELED'` to cancel an open order or DRAFT template. */
+  state?: import('square').OrderState;
+  /** Fulfillments to change, each matched on `uid`. */
+  fulfillments?: UpdateOrderFulfillmentInput[];
+  /**
+   * Fields to remove, as Square dot paths, e.g.
+   * `'fulfillments[FULFILLMENT_UID].shipment_details.tracking_url'`.
+   */
+  fieldsToClear?: string[];
+  /** Reuse it when retrying so Square deduplicates the request. */
+  idempotencyKey?: string;
+}
+
+/**
  * Re-export Square SDK types for SearchOrders
  */
 export type {
