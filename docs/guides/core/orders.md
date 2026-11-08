@@ -300,7 +300,47 @@ const order = await square.orders.get('ORDER_123');
 const updated = await square.orders.update('ORDER_123', {
   version: order.version!, // Required for concurrency control
   referenceId: 'new-reference',
-  idempotencyKey: 'order-123-ref-update', // optional; reuse it on retry
+  idempotencyKey: 'order-123-ref-update', // optional; reuse it only to resend this exact request
+});
+```
+
+The update is sparse: only the fields you pass change. `version` must be the order's current version; Square rejects a stale one, so read the order first. On a version error, re-read the order and send the update again with the new `version` and a **new** `idempotencyKey`. Reuse a key only to resend the identical request (after a timeout, say); Square rejects a reused key with a different body.
+
+### Fulfillments
+
+Change a fulfillment by its `uid`. Moving a `SHIPMENT` fulfillment to `COMPLETED` marks it shipped, and Square stamps `shipmentDetails.shippedAt` itself.
+
+```typescript
+await square.orders.update('ORDER_123', {
+  version: order.version!,
+  fulfillments: [
+    {
+      uid: order.fulfillments![0].uid!,
+      state: 'COMPLETED',
+      shipmentDetails: {
+        carrier: 'Canada Post',
+        shippingType: 'Expedited Parcel',
+        trackingNumber: '1234567890123456',
+        trackingUrl: 'https://www.canadapost-postescanada.ca/track-reperage/en#/details/1234567890123456',
+      },
+    },
+  ],
+});
+```
+
+Writable shipment fields: `carrier`, `shippingType`, `shippingNote`, `trackingNumber`, `trackingUrl`, `expectedShippedAt`. A fulfillment without a `uid` throws `SquareValidationError` before anything is sent.
+
+### Order state and clearing fields
+
+```typescript
+// Cancel an order, or an orphaned DRAFT template
+await square.orders.update('ORDER_123', { version: order.version!, state: 'CANCELED' });
+
+// Remove a field, by Square dot path
+const uid = order.fulfillments![0].uid!;
+await square.orders.update('ORDER_123', {
+  version: order.version!,
+  fieldsToClear: [`fulfillments[${uid}].shipment_details.tracking_url`],
 });
 ```
 
