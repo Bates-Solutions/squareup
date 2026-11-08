@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.3.0**](../../README.md)
+[**@bates-solutions/squareup API Reference v2.4.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createSquareOAuthClient**(`config`): [`SquareOAuthClient`](../classes/SquareOAuthClient.md)
 
-Defined in: [core/oauth.ts:370](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L370)
+Defined in: [core/oauth.ts:377](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L377)
 
 Create an OAuth client for the application-credential endpoints.
 

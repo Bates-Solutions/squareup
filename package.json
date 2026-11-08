@@ -1,6 +1,6 @@
 {
   "name": "@bates-solutions/squareup",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "TypeScript wrapper for Square API with webhook support for Node.js backends",
   "type": "module",
   "main": "./dist/core/index.js",

@@ -1,3 +1,11 @@
+## [2.4.0](https://github.com/Bates-Solutions/squareup/compare/v2.3.0...v2.4.0) (2026-11-08)
+
+
+### Features
+
+* **orders:** `orders.update` can change fulfillments, the order's state and clear fields, not only `referenceId`. It takes `UpdateOrderOptions`: `fulfillments` matched on `uid` with `state` and the writable `shipmentDetails` (`carrier`, `shippingType`, `shippingNote`, `trackingNumber`, `trackingUrl`, `expectedShippedAt`), `state` (e.g. `CANCELED`) and `fieldsToClear`. The update is sparse: only the fields you set are sent. A fulfillment without a `uid`, or a bad `version`, throws `SquareValidationError`. Existing calls compile unchanged ([#160](https://github.com/Bates-Solutions/squareup/pull/160)), closes [#159](https://github.com/Bates-Solutions/squareup/issues/159)
+* **catalog:** `catalog.findVariationsByCode({ upcs, skus })` finds item variations by barcode or SKU without listing the catalog, paging through every match and returning the parent items. `createItem` variations take `upc`, and `CatalogObject.itemVariationData` carries it ([#161](https://github.com/Bates-Solutions/squareup/pull/161)), closes [#155](https://github.com/Bates-Solutions/squareup/issues/155)
+
 ## [2.3.0](https://github.com/Bates-Solutions/squareup/compare/v2.2.0...v2.3.0) (2026-09-24)
 
 
