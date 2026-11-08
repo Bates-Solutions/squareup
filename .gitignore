@@ -37,7 +37,9 @@ temp/
 docs/plans/
 .issues/
 
-# AI assistants
+# AI assistants (agent instructions stay local, out of this public repo and JSR)
+CLAUDE.md
+CLAUDE.local.md
 .claude/
 .cursor/
 .cursorrules
