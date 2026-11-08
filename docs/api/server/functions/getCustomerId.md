@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.4.0**](../../README.md)
+[**@bates-solutions/squareup API Reference v2.5.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getCustomerId**(`event`): `string` \| `undefined`
 
-Defined in: [server/webhook.ts:279](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L279)
+Defined in: [server/webhook.ts:227](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L227)
 
 Extract the customer ID from a webhook event
 

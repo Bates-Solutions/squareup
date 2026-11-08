@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.4.0**](../../README.md)
+[**@bates-solutions/squareup API Reference v2.5.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **verifySignature**(`rawBody`, `signature`, `signatureKey`, `notificationUrl?`): [`WebhookVerificationResult`](../interfaces/WebhookVerificationResult.md)
 
-Defined in: [server/webhook.ts:40](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L40)
+Defined in: [server/webhook.ts:39](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L39)
 
 Verify a Square webhook signature using HMAC-SHA256
 

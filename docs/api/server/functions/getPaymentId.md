@@ -1,4 +1,4 @@
-[**@bates-solutions/squareup API Reference v2.4.0**](../../README.md)
+[**@bates-solutions/squareup API Reference v2.5.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getPaymentId**(`event`): `string` \| `undefined`
 
-Defined in: [server/webhook.ts:247](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L247)
+Defined in: [server/webhook.ts:195](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L195)
 
 Extract the payment ID from a webhook event
 
