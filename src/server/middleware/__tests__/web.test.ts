@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { builtinModules } from 'node:module';
 import { createWebhookHandler } from '../web.js';
 import { SIGNATURE_HEADER } from '../../events.js';
 import * as web from '../web.js';
@@ -184,16 +185,27 @@ describe('createWebhookHandler (edge)', () => {
   });
 
   it('imports no Node built-in, directly or through its relative imports', () => {
+    const builtins = new Set(builtinModules);
     const seen = new Set<string>();
     const visit = (url: URL): void => {
       if (seen.has(url.href)) return;
       seen.add(url.href);
       const source = readFileSync(url, 'utf8');
-      expect(source, url.pathname).not.toMatch(/from ['"](node:|crypto['"]|fs['"]|buffer['"])/);
-      expect(source, url.pathname).not.toMatch(/\bBuffer\./);
-      for (const m of source.matchAll(/from ['"](\.{1,2}\/[^'"]+)\.js['"]/g)) {
-        visit(new URL(`${m[1]}.ts`, url));
+      const specifiers = [
+        ...source.matchAll(/(?:^|\s)(?:import|export)\s[^'"]*?from\s+['"]([^'"]+)['"]/gm),
+        ...source.matchAll(/(?:^|\s)import\s+['"]([^'"]+)['"]/gm),
+        ...source.matchAll(/\b(?:import|require)\s*\(\s*['"]([^'"]+)['"]\s*\)/g),
+      ].map((m) => m[1]);
+      for (const spec of specifiers) {
+        const bare = spec.split('/')[0];
+        expect(spec.startsWith('node:') || builtins.has(bare), `${url.pathname} imports ${spec}`).toBe(
+          false
+        );
+        if (spec.startsWith('.')) {
+          visit(new URL(spec.replace(/\.js$/, '.ts'), url));
+        }
       }
+      expect(source, `${url.pathname} uses Buffer`).not.toMatch(/\bBuffer\b/);
     };
     visit(new URL('../web.ts', import.meta.url));
 
