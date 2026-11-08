@@ -72,6 +72,8 @@ const payment = await square.payments.create({
 - [CreateSubscriptionOptions](interfaces/CreateSubscriptionOptions.md)
 - [CreateWebhookSubscriptionOptions](interfaces/CreateWebhookSubscriptionOptions.md)
 - [Customer](interfaces/Customer.md)
+- [FindVariationsByCodeOptions](interfaces/FindVariationsByCodeOptions.md)
+- [FindVariationsByCodeResult](interfaces/FindVariationsByCodeResult.md)
 - [GiftCard](interfaces/GiftCard.md)
 - [GiftCardActivity](interfaces/GiftCardActivity.md)
 - [LineItemInput](interfaces/LineItemInput.md)
