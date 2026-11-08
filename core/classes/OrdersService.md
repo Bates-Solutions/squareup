@@ -6,7 +6,7 @@
 
 # Class: OrdersService
 
-Defined in: [core/services/orders.service.ts:30](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L30)
+Defined in: [core/services/orders.service.ts:56](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L56)
 
 Orders service for managing Square orders
 
@@ -32,7 +32,7 @@ const order = await square.orders.create({
 
 > **new OrdersService**(`client`, `defaultLocationId?`, `defaultCurrency?`): `OrdersService`
 
-Defined in: [core/services/orders.service.ts:31](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L31)
+Defined in: [core/services/orders.service.ts:57](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L57)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [core/services/orders.service.ts:31](https://github.com/Bates-Soluti
 
 > **builder**(`locationId?`): [`OrderBuilder`](OrderBuilder.md)
 
-Defined in: [core/services/orders.service.ts:53](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L53)
+Defined in: [core/services/orders.service.ts:79](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L79)
 
 Create a new order builder
 
@@ -93,7 +93,7 @@ const order = await square.orders
 
 > **create**(`options`, `locationId?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:82](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L82)
+Defined in: [core/services/orders.service.ts:108](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L108)
 
 Create an order directly (without builder)
 
@@ -135,7 +135,7 @@ const order = await square.orders.create({
 
 > **get**(`orderId`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L140)
+Defined in: [core/services/orders.service.ts:166](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L166)
 
 Get an order by ID
 
@@ -165,7 +165,7 @@ const order = await square.orders.get('ORDER_123');
 
 > **pay**(`orderId`, `paymentIds`, `options?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:215](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L215)
+Defined in: [core/services/orders.service.ts:282](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L282)
 
 Pay for an order
 
@@ -209,7 +209,7 @@ const order = await square.orders.pay('ORDER_123', ['PAYMENT_456']);
 
 > **search**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`Order`](../interfaces/Order.md)[]; \}\>
 
-Defined in: [core/services/orders.service.ts:278](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L278)
+Defined in: [core/services/orders.service.ts:345](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L345)
 
 Search for orders
 
@@ -268,7 +268,7 @@ const { data } = await square.orders.search({
 
 > **searchRecent**(`options?`): `Promise`\<\{ `cursor?`: `string`; `data`: [`Order`](../interfaces/Order.md)[]; \}\>
 
-Defined in: [core/services/orders.service.ts:333](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L333)
+Defined in: [core/services/orders.service.ts:400](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L400)
 
 Search for recent orders with simplified filter options
 
@@ -317,9 +317,10 @@ const page2 = await square.orders.searchRecent({
 
 > **update**(`orderId`, `updates`, `locationId?`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/services/orders.service.ts:163](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L163)
+Defined in: [core/services/orders.service.ts:212](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/orders.service.ts#L212)
 
-Update an order
+Update an order. Only the fields you set are sent (a sparse update), so
+everything else on the order is left as it is.
 
 #### Parameters
 
@@ -331,27 +332,41 @@ Order ID to update
 
 ##### updates
 
-Update fields. Pass `idempotencyKey` and reuse it when
-  retrying so Square deduplicates the request.
+[`UpdateOrderOptions`](../interfaces/UpdateOrderOptions.md)
 
-###### idempotencyKey?
-
-`string`
-
-###### referenceId?
-
-`string`
-
-###### version
-
-`number`
+The order's current `version`, and the fields to change.
+  Pass `idempotencyKey` and reuse it when resending the identical request
+  (say, after a timeout) so Square deduplicates it. After re-reading the
+  order for a new `version`, use a new key: Square rejects a reused key
+  with a different body.
 
 ##### locationId?
 
 `string`
+
+Override the client's default location
 
 #### Returns
 
 `Promise`\<[`Order`](../interfaces/Order.md)\>
 
 Updated order
+
+#### Example
+
+```typescript
+const order = await square.orders.get('ORDER_123');
+
+// Mark a shipment shipped, with tracking
+await square.orders.update('ORDER_123', {
+  version: order.version!,
+  fulfillments: [{
+    uid: order.fulfillments![0].uid!,
+    state: 'COMPLETED',
+    shipmentDetails: { carrier: 'Canada Post', trackingNumber: '1234567890' },
+  }],
+});
+
+// Cancel an order
+await square.orders.update('ORDER_123', { version: order.version!, state: 'CANCELED' });
+```

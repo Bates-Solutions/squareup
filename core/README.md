@@ -100,6 +100,8 @@ const payment = await square.payments.create({
 - [SubscriptionPhaseInput](interfaces/SubscriptionPhaseInput.md)
 - [SubscriptionPlan](interfaces/SubscriptionPlan.md)
 - [UpdateCustomerOptions](interfaces/UpdateCustomerOptions.md)
+- [UpdateOrderFulfillmentInput](interfaces/UpdateOrderFulfillmentInput.md)
+- [UpdateOrderOptions](interfaces/UpdateOrderOptions.md)
 - [UpdateWebhookSubscriptionOptions](interfaces/UpdateWebhookSubscriptionOptions.md)
 
 ## Type Aliases
