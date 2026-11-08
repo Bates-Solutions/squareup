@@ -8,9 +8,12 @@
 
 > **createIdempotencyKey**(): `string`
 
-Defined in: [core/utils.ts:102](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L102)
+Defined in: [core/utils.ts:105](https://github.com/Bates-Solutions/squareup/blob/main/src/core/utils.ts#L105)
 
 Create a unique idempotency key for Square API requests
+
+Uses `globalThis.crypto.randomUUID()`, available on Node 22+, Deno, Bun, and
+Cloudflare Workers.
 
 ## Returns
 

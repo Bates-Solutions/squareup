@@ -9,7 +9,8 @@
 `@bates-solutions/squareup/server` — webhook helpers for the Square wrapper.
 
 Server utilities for handling Square webhooks: signature verification plus a
-typed handler-map dispatch, with adapters for Express, Next.js, and AWS Lambda.
+typed handler-map dispatch, with adapters for Express, Next.js, AWS Lambda,
+and a framework-neutral Web/edge handler (Deno, Cloudflare Workers, Bun).
 
 ## Examples
 
@@ -25,6 +26,21 @@ export const POST = createNextWebhookHandler({
     },
   },
 });
+```
+
+```typescript
+// Deno / Supabase Edge Functions / Cloudflare Workers / Bun
+import { createWebhookHandler } from '@bates-solutions/squareup/server/web';
+
+Deno.serve(createWebhookHandler({
+  signatureKey: Deno.env.get('SQUARE_WEBHOOK_KEY')!,
+  notificationUrl: 'https://example.com/webhook',
+  handlers: {
+    'payment.created': async (event) => {
+      console.log('Payment:', event.data.id);
+    },
+  },
+}));
 ```
 
 ```typescript
@@ -101,6 +117,7 @@ app.post('/webhook', createExpressWebhookHandler({
 - [createLambdaWebhookHandler](functions/createLambdaWebhookHandler.md)
 - [createNextPagesWebhookHandler](functions/createNextPagesWebhookHandler.md)
 - [createNextWebhookHandler](functions/createNextWebhookHandler.md)
+- [createWebhookHandler](functions/createWebhookHandler.md)
 - [createWebhookProcessor](functions/createWebhookProcessor.md)
 - [getCustomerId](functions/getCustomerId.md)
 - [getOrderId](functions/getOrderId.md)
@@ -110,3 +127,4 @@ app.post('/webhook', createExpressWebhookHandler({
 - [parseWebhookEvent](functions/parseWebhookEvent.md)
 - [processWebhookEvent](functions/processWebhookEvent.md)
 - [verifySignature](functions/verifySignature.md)
+- [verifySignatureAsync](functions/verifySignatureAsync.md)

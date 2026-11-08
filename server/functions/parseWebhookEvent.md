@@ -8,7 +8,7 @@
 
 > **parseWebhookEvent**(`rawBody`): [`WebhookEvent`](../interfaces/WebhookEvent.md)
 
-Defined in: [server/webhook.ts:105](https://github.com/Bates-Solutions/squareup/blob/main/src/server/webhook.ts#L105)
+Defined in: [server/events.ts:21](https://github.com/Bates-Solutions/squareup/blob/main/src/server/events.ts#L21)
 
 Parse a webhook request body into a typed event
 
