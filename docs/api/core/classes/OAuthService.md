@@ -6,7 +6,7 @@
 
 # Class: OAuthService
 
-Defined in: [core/services/oauth.service.ts:17](https://github.com/mbates/squareup/blob/main/src/core/services/oauth.service.ts#L17)
+Defined in: [core/services/oauth.service.ts:17](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/oauth.service.ts#L17)
 
 OAuth operations authenticated with the client's merchant access token.
 
@@ -26,7 +26,7 @@ const status = await square.oauth.tokenStatus();
 
 > **new OAuthService**(`client`): `OAuthService`
 
-Defined in: [core/services/oauth.service.ts:18](https://github.com/mbates/squareup/blob/main/src/core/services/oauth.service.ts#L18)
+Defined in: [core/services/oauth.service.ts:18](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/oauth.service.ts#L18)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [core/services/oauth.service.ts:18](https://github.com/mbates/square
 
 > **tokenStatus**(): `Promise`\<[`OAuthTokenStatus`](../interfaces/OAuthTokenStatus.md)\>
 
-Defined in: [core/services/oauth.service.ts:35](https://github.com/mbates/squareup/blob/main/src/core/services/oauth.service.ts#L35)
+Defined in: [core/services/oauth.service.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/oauth.service.ts#L35)
 
 Get the scopes, expiry and merchant of this client's access token. Use it
 as a connection health check, or to confirm a required scope was granted.

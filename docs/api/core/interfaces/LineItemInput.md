@@ -6,7 +6,7 @@
 
 # Interface: LineItemInput
 
-Defined in: [core/types/index.ts:57](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L57)
+Defined in: [core/types/index.ts:57](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L57)
 
 Line item for orders
 
@@ -16,7 +16,7 @@ Line item for orders
 
 > `optional` **amount?**: `number`
 
-Defined in: [core/types/index.ts:61](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L61)
+Defined in: [core/types/index.ts:61](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L61)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/types/index.ts:61](https://github.com/mbates/squareup/blob/mai
 
 > `optional` **appliedDiscounts?**: `object`[]
 
-Defined in: [core/types/index.ts:76](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L76)
+Defined in: [core/types/index.ts:76](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L76)
 
 References to order-level `discounts` (by their `uid`) that apply to this
 line item. Required for `LINE_ITEM`-scoped discounts — Square only applies
@@ -40,7 +40,7 @@ a line-item discount to a line that lists it here.
 
 > `optional` **basePriceMoney?**: `object`
 
-Defined in: [core/types/index.ts:67](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L67)
+Defined in: [core/types/index.ts:67](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L67)
 
 Explicit money override. When set, takes precedence over `amount` + the
 builder's default currency. Useful for order templates where the base
@@ -60,7 +60,7 @@ price must include an explicit currency.
 
 > `optional` **catalogObjectId?**: `string`
 
-Defined in: [core/types/index.ts:59](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L59)
+Defined in: [core/types/index.ts:59](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L59)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [core/types/index.ts:59](https://github.com/mbates/squareup/blob/mai
 
 > `optional` **name?**: `string`
 
-Defined in: [core/types/index.ts:58](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L58)
+Defined in: [core/types/index.ts:58](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L58)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [core/types/index.ts:58](https://github.com/mbates/squareup/blob/mai
 
 > `optional` **note?**: `string`
 
-Defined in: [core/types/index.ts:77](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L77)
+Defined in: [core/types/index.ts:77](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L77)
 
 ***
 
@@ -84,4 +84,4 @@ Defined in: [core/types/index.ts:77](https://github.com/mbates/squareup/blob/mai
 
 > `optional` **quantity?**: `number`
 
-Defined in: [core/types/index.ts:60](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L60)
+Defined in: [core/types/index.ts:60](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L60)

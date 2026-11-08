@@ -6,7 +6,7 @@
 
 # Interface: SearchOrdersOptions
 
-Defined in: [core/types/index.ts:210](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L210)
+Defined in: [core/types/index.ts:210](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L210)
 
 Search orders options
 
@@ -16,7 +16,7 @@ Search orders options
 
 > `optional` **cursor?**: `string`
 
-Defined in: [core/types/index.ts:212](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L212)
+Defined in: [core/types/index.ts:212](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L212)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/types/index.ts:212](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **limit?**: `number`
 
-Defined in: [core/types/index.ts:213](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L213)
+Defined in: [core/types/index.ts:213](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L213)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/types/index.ts:213](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **locationIds?**: `string`[]
 
-Defined in: [core/types/index.ts:211](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L211)
+Defined in: [core/types/index.ts:211](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L211)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [core/types/index.ts:211](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **query?**: `SearchOrdersQuery`
 
-Defined in: [core/types/index.ts:214](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L214)
+Defined in: [core/types/index.ts:214](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L214)

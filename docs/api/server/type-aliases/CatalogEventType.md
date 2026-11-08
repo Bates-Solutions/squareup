@@ -8,4 +8,4 @@
 
 > **CatalogEventType** = `"catalog.version.updated"`
 
-Defined in: [server/types.ts:44](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L44)
+Defined in: [server/types.ts:44](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L44)

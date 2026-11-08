@@ -6,7 +6,7 @@
 
 # Interface: CustomerWebhookObject
 
-Defined in: [server/types.ts:196](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L196)
+Defined in: [server/types.ts:196](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L196)
 
 Customer object in a webhook event payload
 
@@ -16,7 +16,7 @@ Customer object in a webhook event payload
 
 > `optional` **customer?**: `object`
 
-Defined in: [server/types.ts:197](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L197)
+Defined in: [server/types.ts:197](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L197)
 
 #### email\_address?
 

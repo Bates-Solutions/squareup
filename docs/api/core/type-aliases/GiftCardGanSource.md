@@ -8,7 +8,7 @@
 
 > **GiftCardGanSource** = `"SQUARE"` \| `"OTHER"`
 
-Defined in: [core/services/gift-cards.service.ts:17](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L17)
+Defined in: [core/services/gift-cards.service.ts:17](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L17)
 
 Source that produced the gift card account number (GAN).
 

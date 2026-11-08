@@ -6,7 +6,7 @@
 
 # Class: PaymentsService
 
-Defined in: [core/services/payments.service.ts:37](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L37)
+Defined in: [core/services/payments.service.ts:37](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L37)
 
 Simplified payments service
 
@@ -25,7 +25,7 @@ const payment = await square.payments.create({
 
 > **new PaymentsService**(`client`, `defaultLocationId?`, `defaultCurrency?`): `PaymentsService`
 
-Defined in: [core/services/payments.service.ts:38](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L38)
+Defined in: [core/services/payments.service.ts:38](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L38)
 
 #### Parameters
 
@@ -51,7 +51,7 @@ Defined in: [core/services/payments.service.ts:38](https://github.com/mbates/squ
 
 > **cancel**(`paymentId`): `Promise`\<`Payment`\>
 
-Defined in: [core/services/payments.service.ts:156](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L156)
+Defined in: [core/services/payments.service.ts:156](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L156)
 
 Cancel a payment
 
@@ -81,7 +81,7 @@ const payment = await square.payments.cancel('PAYMENT_123');
 
 > **complete**(`paymentId`): `Promise`\<`Payment`\>
 
-Defined in: [core/services/payments.service.ts:182](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L182)
+Defined in: [core/services/payments.service.ts:182](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L182)
 
 Complete a payment (for payments created with autocomplete: false)
 
@@ -111,7 +111,7 @@ const payment = await square.payments.complete('PAYMENT_123');
 
 > **create**(`options`): `Promise`\<`Payment`\>
 
-Defined in: [core/services/payments.service.ts:73](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L73)
+Defined in: [core/services/payments.service.ts:73](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L73)
 
 Create a payment
 
@@ -164,7 +164,7 @@ const payment = await square.payments.create({
 
 > **get**(`paymentId`): `Promise`\<`Payment`\>
 
-Defined in: [core/services/payments.service.ts:130](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L130)
+Defined in: [core/services/payments.service.ts:130](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L130)
 
 Get a payment by ID
 
@@ -194,7 +194,7 @@ const payment = await square.payments.get('PAYMENT_123');
 
 > **list**(`options?`): `Promise`\<`Payment`[]\>
 
-Defined in: [core/services/payments.service.ts:210](https://github.com/mbates/squareup/blob/main/src/core/services/payments.service.ts#L210)
+Defined in: [core/services/payments.service.ts:210](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/payments.service.ts#L210)
 
 List payments with optional filters
 

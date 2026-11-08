@@ -304,6 +304,149 @@ describe('OrdersService', () => {
       );
     });
 
+    // #159 — fulfillments, order state and fieldsToClear.
+    const updated = () => {
+      const client = createMockClient({
+        update: vi.fn().mockResolvedValue({ order: { id: 'ORDER_123' } }),
+      });
+      return { client, service: new OrdersService(client, defaultLocationId) };
+    };
+    const sent = (client: SquareClient) =>
+      vi.mocked(client.orders.update).mock.calls[0][0] as unknown as {
+        order: Record<string, unknown>;
+        fieldsToClear?: string[];
+        idempotencyKey: string;
+      };
+
+    it('sends only the fields that were set (a sparse order)', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', { version: 3 });
+
+      const req = sent(client);
+      expect(req.order).toStrictEqual({ locationId: defaultLocationId, version: 3 });
+      expect(req).not.toHaveProperty('fieldsToClear');
+    });
+
+    it('marks a shipment fulfillment shipped with carrier and tracking', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', {
+        version: 3,
+        fulfillments: [
+          {
+            uid: 'FUL_1',
+            state: 'COMPLETED',
+            shipmentDetails: {
+              carrier: 'Canada Post',
+              trackingNumber: '1234567890',
+              trackingUrl: undefined,
+            },
+          },
+        ],
+      });
+
+      expect(sent(client).order.fulfillments).toStrictEqual([
+        {
+          uid: 'FUL_1',
+          state: 'COMPLETED',
+          shipmentDetails: { carrier: 'Canada Post', trackingNumber: '1234567890' },
+        },
+      ]);
+    });
+
+    it('sends only the writable shipment fields, not Square-stamped ones', async () => {
+      const { client, service } = updated();
+      const details = {
+        carrier: 'Canada Post',
+        shippedAt: '2026-11-07T10:00:00Z',
+        placedAt: '2026-11-06T10:00:00Z',
+      };
+      await service.update('ORDER_123', {
+        version: 3,
+        fulfillments: [{ uid: 'FUL_1', shipmentDetails: details }],
+      });
+
+      expect(sent(client).order.fulfillments).toStrictEqual([
+        { uid: 'FUL_1', shipmentDetails: { carrier: 'Canada Post' } },
+      ]);
+    });
+
+    it('leaves out an empty fulfillments list', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', { version: 3, fulfillments: [] });
+
+      expect(sent(client).order).not.toHaveProperty('fulfillments');
+    });
+
+    it('changes a fulfillment state without shipment details', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', {
+        version: 3,
+        fulfillments: [{ uid: 'FUL_1', state: 'PREPARED' }],
+      });
+
+      expect(sent(client).order.fulfillments).toStrictEqual([{ uid: 'FUL_1', state: 'PREPARED' }]);
+    });
+
+    it('cancels an order', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', { version: 3, state: 'CANCELED' });
+
+      expect(sent(client).order).toMatchObject({ state: 'CANCELED', version: 3 });
+    });
+
+    it('passes fieldsToClear, and leaves it out when empty', async () => {
+      const path = 'fulfillments[FUL_1].shipment_details.tracking_url';
+      const a = updated();
+      await a.service.update('ORDER_123', { version: 3, fieldsToClear: [path] });
+      expect(sent(a.client).fieldsToClear).toEqual([path]);
+
+      const b = updated();
+      await b.service.update('ORDER_123', { version: 3, fieldsToClear: [] });
+      expect(sent(b.client)).not.toHaveProperty('fieldsToClear');
+    });
+
+    it("honours the caller's idempotencyKey", async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', {
+        version: 3,
+        state: 'CANCELED',
+        idempotencyKey: 'cancel-order-123',
+      });
+
+      expect(sent(client).idempotencyKey).toBe('cancel-order-123');
+    });
+
+    it('rejects a fulfillment without a uid, before calling Square', async () => {
+      const { client, service } = updated();
+      const err = await service
+        .update('ORDER_123', { version: 3, fulfillments: [{ uid: ' ', state: 'COMPLETED' }] })
+        .catch((e: unknown) => e);
+
+      expect(err).toBeInstanceOf(SquareValidationError);
+      expect((err as SquareValidationError).field).toBe('fulfillments[0].uid');
+      expect(client.orders.update).not.toHaveBeenCalled();
+    });
+
+    it.each([-1, 1.5, Number.NaN])('rejects version %s', async (version) => {
+      const { client, service } = updated();
+      await expect(service.update('ORDER_123', { version })).rejects.toThrow(
+        SquareValidationError
+      );
+      expect(client.orders.update).not.toHaveBeenCalled();
+    });
+
+    it('throws when Square answers 2xx with errors', async () => {
+      const client = createMockClient({
+        update: vi.fn().mockResolvedValue({
+          order: { id: 'ORDER_123' },
+          errors: [{ category: 'INVALID_REQUEST_ERROR', code: 'VERSION_MISMATCH' }],
+        }),
+      });
+      const service = new OrdersService(client, defaultLocationId);
+
+      await expect(service.update('ORDER_123', { version: 3 })).rejects.toThrow(SquareApiError);
+    });
+
     it('should throw if update fails', async () => {
       const client = createMockClient({
         update: vi.fn().mockResolvedValue({}),

@@ -234,10 +234,10 @@ export const handler = createLambdaWebhookHandler({
 | Service          | Description                                                    |
 | ---------------- | -------------------------------------------------------------- |
 | `payments`       | Process and manage payments                                    |
-| `orders`         | Create and manage orders, incl. DRAFT templates for subscriptions |
+| `orders`         | Create and manage orders, incl. DRAFT templates for subscriptions, fulfillment updates and cancelling |
 | `customers`      | Customer management                                            |
 | `customerGroups` | Customer groups + group membership (gates pricing rules)       |
-| `catalog`        | Product catalog ops, incl. pricing rules and wholesale pricing |
+| `catalog`        | Product catalog ops, incl. pricing rules, wholesale pricing and UPC/SKU lookup |
 | `inventory`      | Stock counts, adjustments and transfers between locations      |
 | `subscriptions`  | Subscription management, incl. phases backed by order templates |
 | `invoices`       | Invoice operations                                             |
@@ -268,9 +268,9 @@ This library is one of three sibling payment-API wrappers from Bates Solutions t
 
 | Library | Wraps | Install (JSR) | Source |
 | --- | --- | --- | --- |
-| [`@bates-solutions/stripe`](https://jsr.io/@bates-solutions/stripe) | Stripe | `jsr:@bates-solutions/stripe` | [GitHub](https://github.com/mbates/stripe) |
-| **[`@bates-solutions/squareup`](https://jsr.io/@bates-solutions/squareup)** _(this package)_ | Square | `jsr:@bates-solutions/squareup` | [GitHub](https://github.com/mbates/squareup) |
-| [`@bates-solutions/clover`](https://jsr.io/@bates-solutions/clover) | Clover | `jsr:@bates-solutions/clover` | [GitHub](https://github.com/mbates/clover) |
+| [`@bates-solutions/stripe`](https://jsr.io/@bates-solutions/stripe) | Stripe | `jsr:@bates-solutions/stripe` | [GitHub](https://github.com/Bates-Solutions/stripe) |
+| **[`@bates-solutions/squareup`](https://jsr.io/@bates-solutions/squareup)** _(this package)_ | Square | `jsr:@bates-solutions/squareup` | [GitHub](https://github.com/Bates-Solutions/squareup) |
+| [`@bates-solutions/clover`](https://jsr.io/@bates-solutions/clover) | Clover | `jsr:@bates-solutions/clover` | [GitHub](https://github.com/Bates-Solutions/clover) |
 
 ### How they're related
 

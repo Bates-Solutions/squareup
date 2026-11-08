@@ -6,7 +6,7 @@
 
 # Interface: OrderDiscountInput
 
-Defined in: [core/types/index.ts:140](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L140)
+Defined in: [core/types/index.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L140)
 
 An order discount. Reference an existing `CatalogDiscount` by
 `catalogObjectId` (keeps the catalog authoritative — the price tracks the
@@ -22,7 +22,7 @@ https://developer.squareup.com/docs/orders-api/discounts
 
 > `optional` **amountMoney?**: `object`
 
-Defined in: [core/types/index.ts:150](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L150)
+Defined in: [core/types/index.ts:150](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L150)
 
 Fixed amount (for amount types).
 
@@ -40,7 +40,7 @@ Fixed amount (for amount types).
 
 > `optional` **catalogObjectId?**: `string`
 
-Defined in: [core/types/index.ts:144](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L144)
+Defined in: [core/types/index.ts:144](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L144)
 
 Reference an existing `CatalogDiscount` by id.
 
@@ -50,7 +50,7 @@ Reference an existing `CatalogDiscount` by id.
 
 > `optional` **name?**: `string`
 
-Defined in: [core/types/index.ts:145](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L145)
+Defined in: [core/types/index.ts:145](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L145)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [core/types/index.ts:145](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **percentage?**: `string`
 
-Defined in: [core/types/index.ts:148](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L148)
+Defined in: [core/types/index.ts:148](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L148)
 
 Percentage as a string, e.g. `"7.25"` (for percentage types).
 
@@ -68,7 +68,7 @@ Percentage as a string, e.g. `"7.25"` (for percentage types).
 
 > `optional` **scope?**: [`OrderDiscountScope`](../type-aliases/OrderDiscountScope.md)
 
-Defined in: [core/types/index.ts:156](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L156)
+Defined in: [core/types/index.ts:156](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L156)
 
 `ORDER` applies to the whole order (Square auto-applies to every line);
 `LINE_ITEM` applies only to lines that list this discount's `uid` in their
@@ -80,7 +80,7 @@ Defined in: [core/types/index.ts:156](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **type?**: [`OrderDiscountType`](../type-aliases/OrderDiscountType.md)
 
-Defined in: [core/types/index.ts:146](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L146)
+Defined in: [core/types/index.ts:146](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L146)
 
 ***
 
@@ -88,6 +88,6 @@ Defined in: [core/types/index.ts:146](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **uid?**: `string`
 
-Defined in: [core/types/index.ts:142](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L142)
+Defined in: [core/types/index.ts:142](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L142)
 
 Client-side id; reference it from a line item's `appliedDiscounts`.

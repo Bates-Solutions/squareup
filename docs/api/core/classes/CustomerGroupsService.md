@@ -6,7 +6,7 @@
 
 # Class: CustomerGroupsService
 
-Defined in: [core/services/customer-groups.service.ts:50](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L50)
+Defined in: [core/services/customer-groups.service.ts:50](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L50)
 
 Customer Groups service for managing Square customer groups and memberships.
 
@@ -26,7 +26,7 @@ await square.customerGroups.addCustomer(group.id!, 'CUST_123');
 
 > **new CustomerGroupsService**(`client`): `CustomerGroupsService`
 
-Defined in: [core/services/customer-groups.service.ts:51](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L51)
+Defined in: [core/services/customer-groups.service.ts:51](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L51)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [core/services/customer-groups.service.ts:51](https://github.com/mba
 
 > **addCustomer**(`groupId`, `customerId`): `Promise`\<`void`\>
 
-Defined in: [core/services/customer-groups.service.ts:160](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L160)
+Defined in: [core/services/customer-groups.service.ts:160](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L160)
 
 Add a customer to a group.
 
@@ -68,7 +68,7 @@ Add a customer to a group.
 
 > **create**(`options`): `Promise`\<`CustomerGroup`\>
 
-Defined in: [core/services/customer-groups.service.ts:56](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L56)
+Defined in: [core/services/customer-groups.service.ts:56](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L56)
 
 Create a new customer group.
 
@@ -88,7 +88,7 @@ Create a new customer group.
 
 > **delete**(`groupId`): `Promise`\<`void`\>
 
-Defined in: [core/services/customer-groups.service.ts:127](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L127)
+Defined in: [core/services/customer-groups.service.ts:127](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L127)
 
 Delete a customer group. Customers are not deleted — only the group and
 its memberships.
@@ -109,7 +109,7 @@ its memberships.
 
 > **get**(`groupId`): `Promise`\<`CustomerGroup`\>
 
-Defined in: [core/services/customer-groups.service.ts:81](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L81)
+Defined in: [core/services/customer-groups.service.ts:81](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L81)
 
 Get a customer group by ID.
 
@@ -129,7 +129,7 @@ Get a customer group by ID.
 
 > **list**(`options?`): `Promise`\<\{ `cursor?`: `string`; `groups`: `CustomerGroup`[]; \}\>
 
-Defined in: [core/services/customer-groups.service.ts:138](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L138)
+Defined in: [core/services/customer-groups.service.ts:138](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L138)
 
 List customer groups with cursor-based pagination.
 
@@ -149,7 +149,7 @@ List customer groups with cursor-based pagination.
 
 > **removeCustomer**(`groupId`, `customerId`): `Promise`\<`void`\>
 
-Defined in: [core/services/customer-groups.service.ts:171](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L171)
+Defined in: [core/services/customer-groups.service.ts:171](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L171)
 
 Remove a customer from a group.
 
@@ -173,7 +173,7 @@ Remove a customer from a group.
 
 > **update**(`groupId`, `options`): `Promise`\<`CustomerGroup`\>
 
-Defined in: [core/services/customer-groups.service.ts:99](https://github.com/mbates/squareup/blob/main/src/core/services/customer-groups.service.ts#L99)
+Defined in: [core/services/customer-groups.service.ts:99](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/customer-groups.service.ts#L99)
 
 Update a customer group's name.
 

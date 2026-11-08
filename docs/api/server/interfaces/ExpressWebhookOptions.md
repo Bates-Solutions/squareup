@@ -6,7 +6,7 @@
 
 # Interface: ExpressWebhookOptions
 
-Defined in: [server/middleware/express.ts:68](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L68)
+Defined in: [server/middleware/express.ts:68](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L68)
 
 Options for the Express webhook middleware
 
@@ -20,7 +20,7 @@ Options for the Express webhook middleware
 
 > `optional` **autoRespond?**: `boolean`
 
-Defined in: [server/middleware/express.ts:78](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L78)
+Defined in: [server/middleware/express.ts:78](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L78)
 
 Whether to send response automatically
 
@@ -36,7 +36,7 @@ true
 
 > **handlers**: [`WebhookHandlers`](../type-aliases/WebhookHandlers.md)
 
-Defined in: [server/types.ts:115](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L115)
+Defined in: [server/types.ts:115](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L115)
 
 Event handlers by type
 
@@ -50,7 +50,7 @@ Event handlers by type
 
 > `optional` **notificationUrl?**: `string`
 
-Defined in: [server/types.ts:117](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L117)
+Defined in: [server/types.ts:117](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L117)
 
 URL where webhooks are received (for signature verification)
 
@@ -64,7 +64,7 @@ URL where webhooks are received (for signature verification)
 
 > `optional` **path?**: `string`
 
-Defined in: [server/middleware/express.ts:73](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L73)
+Defined in: [server/middleware/express.ts:73](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L73)
 
 Path to mount the webhook handler
 
@@ -80,7 +80,7 @@ Path to mount the webhook handler
 
 > **signatureKey**: `string`
 
-Defined in: [server/types.ts:113](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L113)
+Defined in: [server/types.ts:113](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L113)
 
 Square webhook signature key
 
@@ -94,7 +94,7 @@ Square webhook signature key
 
 > `optional` **throwOnInvalidSignature?**: `boolean`
 
-Defined in: [server/types.ts:125](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L125)
+Defined in: [server/types.ts:125](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L125)
 
 How `createWebhookProcessor` reports an invalid signature. When `true`
 (default) it throws (surfaced as `{ success: false, error }`); when `false`

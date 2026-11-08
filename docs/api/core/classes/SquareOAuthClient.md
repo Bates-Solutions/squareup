@@ -6,7 +6,7 @@
 
 # Class: SquareOAuthClient
 
-Defined in: [core/oauth.ts:204](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L204)
+Defined in: [core/oauth.ts:204](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L204)
 
 OAuth client for the application-credential endpoints: exchanging an
 authorization code, refreshing, and revoking tokens.
@@ -35,7 +35,7 @@ const tokens = await oauth.obtainToken({ code });
 
 > **new SquareOAuthClient**(`config`): `SquareOAuthClient`
 
-Defined in: [core/oauth.ts:210](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L210)
+Defined in: [core/oauth.ts:210](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L210)
 
 #### Parameters
 
@@ -53,7 +53,7 @@ Defined in: [core/oauth.ts:210](https://github.com/mbates/squareup/blob/main/src
 
 > **obtainToken**(`options`): `Promise`\<[`OAuthTokens`](../interfaces/OAuthTokens.md)\>
 
-Defined in: [core/oauth.ts:239](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L239)
+Defined in: [core/oauth.ts:239](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L239)
 
 Exchange the authorization `code` from the OAuth redirect for tokens.
 
@@ -90,7 +90,7 @@ const { accessToken, refreshToken, expiresAt, merchantId } =
 
 > **refreshToken**(`options`): `Promise`\<[`OAuthTokens`](../interfaces/OAuthTokens.md)\>
 
-Defined in: [core/oauth.ts:258](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L258)
+Defined in: [core/oauth.ts:258](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L258)
 
 Get a new access token using a refresh token. Run this on a schedule
 well before `expiresAt` — Square recommends every 7 days or less.
@@ -119,7 +119,7 @@ const refreshed = await oauth.refreshToken({ refreshToken: stored.refreshToken }
 
 > **revokeToken**(`options`): `Promise`\<`void`\>
 
-Defined in: [core/oauth.ts:277](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L277)
+Defined in: [core/oauth.ts:277](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L277)
 
 Revoke this application's access to a merchant. Pass the merchant's
 `merchantId` to revoke every token issued to them, or an `accessToken`

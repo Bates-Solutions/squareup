@@ -6,7 +6,7 @@
 
 # Class: OrderBuilder
 
-Defined in: [core/builders/order.builder.ts:75](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L75)
+Defined in: [core/builders/order.builder.ts:75](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L75)
 
 Fluent builder for creating Square orders
 
@@ -28,7 +28,7 @@ const order = await square.orders
 
 > **new OrderBuilder**(`client`, `locationId`, `defaultCurrency?`): `OrderBuilder`
 
-Defined in: [core/builders/order.builder.ts:86](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L86)
+Defined in: [core/builders/order.builder.ts:86](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L86)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [core/builders/order.builder.ts:86](https://github.com/mbates/square
 
 > **addDiscount**(`discount`): `this`
 
-Defined in: [core/builders/order.builder.ts:188](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L188)
+Defined in: [core/builders/order.builder.ts:188](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L188)
 
 Add an order discount. Reference an existing `CatalogDiscount` by
 `catalogObjectId` (price tracks the catalog), or define one inline. For a
@@ -85,7 +85,7 @@ builder
 
 > **addDiscounts**(`discounts`): `this`
 
-Defined in: [core/builders/order.builder.ts:210](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L210)
+Defined in: [core/builders/order.builder.ts:210](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L210)
 
 Add multiple order discounts at once.
 
@@ -105,7 +105,7 @@ Add multiple order discounts at once.
 
 > **addItem**(`item`): `this`
 
-Defined in: [core/builders/order.builder.ts:118](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L118)
+Defined in: [core/builders/order.builder.ts:118](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L118)
 
 Add a line item to the order
 
@@ -137,7 +137,7 @@ builder
 
 > **addItems**(`items`): `this`
 
-Defined in: [core/builders/order.builder.ts:168](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L168)
+Defined in: [core/builders/order.builder.ts:168](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L168)
 
 Add multiple line items at once
 
@@ -161,7 +161,7 @@ Builder instance for chaining
 
 > **asTemplate**(): `this`
 
-Defined in: [core/builders/order.builder.ts:291](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L291)
+Defined in: [core/builders/order.builder.ts:291](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L291)
 
 Shorthand for a DRAFT order with `autoApplyDiscounts: true`.
 
@@ -182,7 +182,7 @@ for non-subscription DRAFT orders that do want auto-applied pricing rules.
 
 > **build**(): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [core/builders/order.builder.ts:347](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L347)
+Defined in: [core/builders/order.builder.ts:347](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L347)
 
 Build and create the order
 
@@ -206,7 +206,7 @@ When API call fails
 
 > **preview**(): `object`
 
-Defined in: [core/builders/order.builder.ts:382](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L382)
+Defined in: [core/builders/order.builder.ts:382](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L382)
 
 Preview the order without creating it
 Returns the order configuration that would be sent
@@ -261,7 +261,7 @@ Returns the order configuration that would be sent
 
 > **reset**(): `this`
 
-Defined in: [core/builders/order.builder.ts:411](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L411)
+Defined in: [core/builders/order.builder.ts:411](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L411)
 
 Reset the builder to start fresh
 
@@ -275,7 +275,7 @@ Reset the builder to start fresh
 
 > **withCurrency**(`currency`): `this`
 
-Defined in: [core/builders/order.builder.ts:100](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L100)
+Defined in: [core/builders/order.builder.ts:100](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L100)
 
 Set the currency for the order
 
@@ -299,7 +299,7 @@ Builder instance for chaining
 
 > **withCustomer**(`customerId`): `this`
 
-Defined in: [core/builders/order.builder.ts:234](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L234)
+Defined in: [core/builders/order.builder.ts:234](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L234)
 
 Associate a customer with the order
 
@@ -323,7 +323,7 @@ Builder instance for chaining
 
 > **withIdempotencyKey**(`key`): `this`
 
-Defined in: [core/builders/order.builder.ts:299](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L299)
+Defined in: [core/builders/order.builder.ts:299](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L299)
 
 Provide an explicit idempotency key. Useful for retrying subscription
 template creation without producing duplicate orders.
@@ -344,7 +344,7 @@ template creation without producing duplicate orders.
 
 > **withNote**(`_note`): `this`
 
-Defined in: [core/builders/order.builder.ts:256](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L256)
+Defined in: [core/builders/order.builder.ts:256](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L256)
 
 Add a note to the order
 
@@ -366,7 +366,7 @@ Builder instance for chaining
 
 > **withPricingOptions**(`options`): `this`
 
-Defined in: [core/builders/order.builder.ts:276](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L276)
+Defined in: [core/builders/order.builder.ts:276](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L276)
 
 Set pricing options. `autoApplyDiscounts: true` is required for templates
 that should pick up customer-group pricing rules (wholesale tiers) at each
@@ -388,7 +388,7 @@ subscription billing cycle.
 
 > **withReference**(`referenceId`): `this`
 
-Defined in: [core/builders/order.builder.ts:245](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L245)
+Defined in: [core/builders/order.builder.ts:245](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L245)
 
 Add a reference ID for external tracking
 
@@ -412,7 +412,7 @@ Builder instance for chaining
 
 > **withState**(`state`): `this`
 
-Defined in: [core/builders/order.builder.ts:266](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L266)
+Defined in: [core/builders/order.builder.ts:266](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L266)
 
 Set the order state. Use `'DRAFT'` when creating an order template that
 will back a subscription phase.
@@ -433,7 +433,7 @@ will back a subscription phase.
 
 > **withTip**(`amount`): `this`
 
-Defined in: [core/builders/order.builder.ts:223](https://github.com/mbates/squareup/blob/main/src/core/builders/order.builder.ts#L223)
+Defined in: [core/builders/order.builder.ts:223](https://github.com/Bates-Solutions/squareup/blob/main/src/core/builders/order.builder.ts#L223)
 
 Add a tip to the order
 

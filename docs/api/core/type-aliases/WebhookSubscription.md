@@ -8,7 +8,7 @@
 
 > **WebhookSubscription** = `Omit`\<`Square.WebhookSubscription`, `"signatureKey"`\>
 
-Defined in: [core/services/webhook-subscriptions.service.ts:13](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L13)
+Defined in: [core/services/webhook-subscriptions.service.ts:13](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L13)
 
 A webhook subscription as returned by `get`, `list`, and `update`.
 

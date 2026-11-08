@@ -55,6 +55,10 @@ export type {
 } from './services/customers.service.js';
 export { CustomerGroupsService } from './services/customer-groups.service.js';
 export { CatalogService } from './services/catalog.service.js';
+export type {
+  FindVariationsByCodeOptions,
+  FindVariationsByCodeResult,
+} from './services/catalog.service.js';
 export { InventoryService } from './services/inventory.service.js';
 export { SubscriptionsService } from './services/subscriptions.service.js';
 export type {

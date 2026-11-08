@@ -6,7 +6,7 @@
 
 # Interface: Location
 
-Defined in: [core/services/locations.service.ts:11](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L11)
+Defined in: [core/services/locations.service.ts:11](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L11)
 
 A Square location (a merchant's business location).
 
@@ -20,7 +20,7 @@ of hardcoding or configuring it.
 
 > `optional` **country?**: `string`
 
-Defined in: [core/services/locations.service.ts:16](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L16)
+Defined in: [core/services/locations.service.ts:16](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L16)
 
 Two-letter ISO 3166 country code, e.g. `US`, `CA`
 
@@ -30,7 +30,7 @@ Two-letter ISO 3166 country code, e.g. `US`, `CA`
 
 > `optional` **currency?**: `string`
 
-Defined in: [core/services/locations.service.ts:18](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L18)
+Defined in: [core/services/locations.service.ts:18](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L18)
 
 ISO 4217 currency code, e.g. `USD`, `CAD`
 
@@ -40,7 +40,7 @@ ISO 4217 currency code, e.g. `USD`, `CAD`
 
 > `optional` **id?**: `string`
 
-Defined in: [core/services/locations.service.ts:12](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L12)
+Defined in: [core/services/locations.service.ts:12](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L12)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/services/locations.service.ts:12](https://github.com/mbates/sq
 
 > `optional` **name?**: `string` \| `null`
 
-Defined in: [core/services/locations.service.ts:14](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L14)
+Defined in: [core/services/locations.service.ts:14](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L14)
 
 Location nickname shown in the Seller Dashboard
 
@@ -58,6 +58,6 @@ Location nickname shown in the Seller Dashboard
 
 > `optional` **status?**: `string`
 
-Defined in: [core/services/locations.service.ts:20](https://github.com/mbates/squareup/blob/main/src/core/services/locations.service.ts#L20)
+Defined in: [core/services/locations.service.ts:20](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/locations.service.ts#L20)
 
 Location status, e.g. `ACTIVE` or `INACTIVE`
