@@ -198,7 +198,8 @@ export interface OAuthTokenStatus {
  * });
  *
  * // In the redirect handler, after verifying `state`: require a stored value,
- * // delete it (one use), then compare it with the query value.
+ * // delete it (one use), then compare it with the query value. Then handle a
+ * // deny (`error=access_denied`, no `code`) and require `code` to be a string.
  * // See docs/guides/core/oauth.md.
  * const tokens = await oauth.obtainToken({ code });
  * ```
@@ -234,6 +235,10 @@ export class SquareOAuthClient {
    *
    * @example
    * ```typescript
+   * // After the state check (see docs/guides/core/oauth.md)
+   * if (typeof req.query.error === 'string') return res.redirect('/settings?connect=denied');
+   * if (typeof req.query.code !== 'string') throw new Error('OAuth code missing');
+   *
    * const { accessToken, refreshToken, expiresAt, merchantId } =
    *   await oauth.obtainToken({ code: req.query.code });
    * ```

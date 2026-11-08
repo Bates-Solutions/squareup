@@ -48,6 +48,8 @@ Request every scope your integration calls. A missing scope only shows up at run
 
 Square redirects to your callback with `code` and `state`. Check `state` before exchanging the code. The code is valid for 5 minutes.
 
+If the seller clicks Deny, Square still redirects to your callback with the same `state`, but sends `error=access_denied&error_description=user_denied` and no `code`. Handle that after the state check, before calling `obtainToken`.
+
 ```typescript
 // Take the stored state and delete it, so each value works only once
 const storedState = req.session.oauthState;
@@ -57,6 +59,14 @@ if (!storedState) throw new Error('OAuth state missing: start the flow again');
 if (typeof req.query.state !== 'string' || req.query.state !== storedState) {
   throw new Error('OAuth state mismatch');
 }
+
+// The seller denied access (or Square reported another error): no code to exchange
+if (typeof req.query.error === 'string') {
+  return res.redirect('/settings/square?connect=denied');
+}
+
+// Express types query values as string | string[] | ParsedQs: accept a single string only
+if (typeof req.query.code !== 'string') throw new Error('OAuth code missing');
 
 const tokens = await oauth.obtainToken({ code: req.query.code });
 // {
