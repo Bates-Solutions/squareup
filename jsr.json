@@ -1,6 +1,6 @@
 {
   "name": "@bates-solutions/squareup",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "exports": {
     ".": "./src/core/index.ts",
     "./server": "./src/server/index.ts",
