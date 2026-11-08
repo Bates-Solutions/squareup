@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { toCents, fromCents, formatMoney, createIdempotencyKey, toSquareMoney } from '../utils.js';
 
 describe('Money Utilities', () => {
@@ -95,6 +95,18 @@ describe('createIdempotencyKey', () => {
     const key = createIdempotencyKey();
     // UUID format: 8-4-4-4-12
     expect(key).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
+  });
+
+  it('uses the portable globalThis.crypto.randomUUID', () => {
+    const spy = vi
+      .spyOn(globalThis.crypto, 'randomUUID')
+      .mockReturnValueOnce('00000000-0000-4000-8000-000000000000');
+    try {
+      expect(createIdempotencyKey()).toBe('00000000-0000-4000-8000-000000000000');
+      expect(spy).toHaveBeenCalledOnce();
+    } finally {
+      spy.mockRestore();
+    }
   });
 });
 

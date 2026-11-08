@@ -2,7 +2,8 @@
  * `@bates-solutions/squareup/server` — webhook helpers for the Square wrapper.
  *
  * Server utilities for handling Square webhooks: signature verification plus a
- * typed handler-map dispatch, with adapters for Express, Next.js, and AWS Lambda.
+ * typed handler-map dispatch, with adapters for Express, Next.js, AWS Lambda,
+ * and a framework-neutral Web/edge handler (Deno, Cloudflare Workers, Bun).
  *
  * @module
  *
@@ -19,6 +20,22 @@
  *     },
  *   },
  * });
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Deno / Supabase Edge Functions / Cloudflare Workers / Bun
+ * import { createWebhookHandler } from '@bates-solutions/squareup/server/web';
+ *
+ * Deno.serve(createWebhookHandler({
+ *   signatureKey: Deno.env.get('SQUARE_WEBHOOK_KEY')!,
+ *   notificationUrl: 'https://example.com/webhook',
+ *   handlers: {
+ *     'payment.created': async (event) => {
+ *       console.log('Payment:', event.data.id);
+ *     },
+ *   },
+ * }));
  * ```
  *
  * @example
@@ -82,6 +99,10 @@ export {
   getOrderId,
   getCustomerId,
 } from './webhook.js';
+
+// Framework-neutral (edge/Deno/Workers) handler and WebCrypto verification
+export { createWebhookHandler } from './middleware/web.js';
+export { verifySignatureAsync } from './webcrypto.js';
 
 // Express middleware
 export {

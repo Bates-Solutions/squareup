@@ -6,7 +6,7 @@ This guide covers handling Square webhooks with `@bates-solutions/squareup`.
 
 - Square account with webhook configured
 - Webhook signature key from Square Developer Dashboard
-- Node.js backend (Express, Next.js, etc.)
+- A server runtime: Node.js 22+ (Express, Next.js, Lambda) or any Fetch API runtime (Deno, Supabase Edge Functions, Cloudflare Workers, Bun) via `./server/web`
 
 ## Overview
 
@@ -79,6 +79,28 @@ if (!result.valid) {
   return { status: 401 };
 }
 ```
+
+### Edge runtimes: `verifySignatureAsync`
+
+`verifySignature` uses Node's `crypto`. On Deno, Supabase Edge Functions,
+Cloudflare Workers or Bun, use `verifySignatureAsync` from
+`@bates-solutions/squareup/server/web` instead. It runs the same check with
+WebCrypto (`globalThis.crypto.subtle`) and a constant-time compare, returns the
+same result shape, and is async because WebCrypto is promise-based.
+`./server/web` imports no Node built-in.
+
+```typescript
+import { verifySignatureAsync, parseWebhookEvent } from '@bates-solutions/squareup/server/web';
+
+const result = await verifySignatureAsync(rawBody, signature, signatureKey, notificationUrl);
+if (!result.valid) {
+  return Response.json({ error: result.error }, { status: 401 });
+}
+const event = parseWebhookEvent(rawBody);
+```
+
+For a complete handler, see `createWebhookHandler` in the
+[middleware guide](./middleware.md#web--edge-handler).
 
 ### Security Notes
 

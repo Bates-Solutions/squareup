@@ -7,11 +7,10 @@ import type {
   PaymentWebhookObject,
   RefundWebhookObject,
 } from './types.js';
+import { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent } from './events.js';
 
-/**
- * Header name for Square webhook signature
- */
-export const SIGNATURE_HEADER = 'x-square-hmacsha256-signature';
+// Defined in the Node-free events module so the edge entry point can share them.
+export { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent };
 
 /**
  * Verify a Square webhook signature using HMAC-SHA256
@@ -90,27 +89,6 @@ export function verifySignature(
 }
 
 /**
- * Parse a webhook request body into a typed event
- *
- * @param rawBody - The raw request body string
- * @returns Parsed webhook event
- * @throws Error if parsing fails
- *
- * @example
- * ```typescript
- * const event = parseWebhookEvent(rawBody);
- * console.log(event.type); // 'payment.completed'
- * ```
- */
-export function parseWebhookEvent(rawBody: string): WebhookEvent {
-  try {
-    return JSON.parse(rawBody) as WebhookEvent;
-  } catch {
-    throw new Error('Invalid webhook payload: failed to parse JSON');
-  }
-}
-
-/**
  * Parse and verify a webhook request
  *
  * @param rawBody - The raw request body string
@@ -148,36 +126,6 @@ export function parseAndVerifyWebhook(
     signature,
     event,
   };
-}
-
-/**
- * Process a webhook event by calling the appropriate handler
- *
- * @param event - The parsed webhook event
- * @param config - Webhook configuration with handlers
- * @returns Promise that resolves when handler completes
- *
- * @example
- * ```typescript
- * await processWebhookEvent(event, {
- *   signatureKey: process.env.SQUARE_WEBHOOK_KEY!,
- *   handlers: {
- *     'payment.created': async (event) => {
- *       console.log('Payment created:', event.data.id);
- *     },
- *   },
- * });
- * ```
- */
-export async function processWebhookEvent(
-  event: WebhookEvent,
-  config: WebhookConfig
-): Promise<void> {
-  const handler = config.handlers[event.type];
-
-  if (handler) {
-    await handler(event);
-  }
 }
 
 /**

@@ -26,7 +26,7 @@ Backend webhook handling:
 
 - [Webhook Handling](./server/webhooks.md) - Signature verification and event handling
 - [Webhook Subscriptions](./server/webhook-subscriptions.md) - Manage subscriptions (create/list/update/delete/test/rotate key)
-- [Framework Middleware](./server/middleware.md) - Express, Next.js and Lambda integration
+- [Framework Middleware](./server/middleware.md) - Web/edge (Deno, Workers, Bun), Express, Next.js and Lambda integration
 
 ## Deployment
 

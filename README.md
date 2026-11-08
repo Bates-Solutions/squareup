@@ -27,7 +27,7 @@ Stop wrestling with Square's low-level APIs. **squareup** gives you a simplified
 - **Simplified APIs** - Less boilerplate, more productivity
 - **Type-Safe** - Full TypeScript support with strict types
 - **Fluent Builders** - Chainable order and payment construction
-- **Webhook Support** - Signature verification and middleware for Express/Next.js
+- **Webhook Support** - Signature verification plus adapters for Express, Next.js, AWS Lambda, and a framework-neutral Web/edge handler (Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
 - **OAuth** - Authorize URL, code exchange, refresh, revoke and token status for multi-tenant apps ([guide](./docs/guides/core/oauth.md))
 - **Service Classes** - Payments, Orders, Customers, Customer Groups, Catalog (incl. pricing rules and subscription plan listing), Inventory, Subscriptions, Invoices, Loyalty, Gift Cards
 
@@ -80,11 +80,13 @@ JSR's npm tarball ships with `exports` only (no legacy `main`/`types`). Set your
 ### Importing the server webhook helpers
 
 `@bates-solutions/squareup/server` re-exports every helper — signature
-verification, the typed dispatcher, and the Express, Next.js, and Lambda
+verification, the typed dispatcher, and the Web, Express, Next.js, and Lambda
 adapters. Framework adapters are **also** available as their own subpaths, so a
-Lambda or Next.js app never pulls Express's types (or vice versa):
+Lambda or Next.js app never pulls Express's types (or vice versa). On an edge
+runtime, import from `./server/web`: it pulls in no Node built-in.
 
 ```ts
+import { createWebhookHandler }        from '@bates-solutions/squareup/server/web';
 import { createLambdaWebhookHandler } from '@bates-solutions/squareup/server/lambda';
 import { createNextWebhookHandler }   from '@bates-solutions/squareup/server/nextjs';
 import { createExpressWebhookHandler } from '@bates-solutions/squareup/server/express';
@@ -142,69 +144,102 @@ const recent = await client.customers.list({ sortField: 'CREATED_AT', sortOrder:
 const results = await client.customers.search({ query: 'john doe' });
 ```
 
+Square signs `notificationUrl + rawBody`, so pass `notificationUrl` set to the
+exact URL registered on your webhook subscription.
+
+### Webhook Handling (Edge: Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
+
+`createWebhookHandler` takes a standard `Request` and returns a standard
+`Response`. It verifies with WebCrypto and uses only Web APIs, so it runs on any
+Fetch API runtime:
+
+```typescript
+import { createWebhookHandler } from '@bates-solutions/squareup/server/web';
+
+Deno.serve(createWebhookHandler({
+  signatureKey: Deno.env.get('SQUARE_WEBHOOK_SIGNATURE_KEY')!,
+  notificationUrl: 'https://example.supabase.co/functions/v1/square-webhook',
+  handlers: {
+    'payment.updated': async (event) => {
+      console.log('Payment updated:', event.data.id);
+    },
+  },
+}));
+```
+
 ### Webhook Handling (Express)
 
 ```typescript
 import express from 'express';
-import { createWebhookHandler, rawBodyMiddleware } from '@bates-solutions/squareup/server';
+import { createExpressWebhookHandler } from '@bates-solutions/squareup/server';
 
 const app = express();
 
-// Use raw body middleware before JSON parsing for webhook routes
-app.use('/webhooks/square', rawBodyMiddleware);
-app.use(express.json());
+// Raw body parser on the webhook route, before any JSON parsing
+app.use('/webhooks/square', express.raw({ type: 'application/json' }));
 
-const webhookHandler = createWebhookHandler({
+app.post('/webhooks/square', createExpressWebhookHandler({
   signatureKey: process.env.SQUARE_WEBHOOK_SIGNATURE_KEY!,
-});
-
-app.post('/webhooks/square', (req, res) => {
-  const event = webhookHandler.verifyAndParse(req);
-
-  switch (event.type) {
-    case 'payment.completed':
-      console.log('Payment completed:', event.data);
-      break;
-    case 'order.created':
-      console.log('Order created:', event.data);
-      break;
-  }
-
-  res.sendStatus(200);
-});
+  notificationUrl: 'https://example.com/webhooks/square',
+  handlers: {
+    'payment.updated': async (event) => {
+      console.log('Payment updated:', event.data.id);
+    },
+    'order.created': async (event) => {
+      console.log('Order created:', event.data.id);
+    },
+  },
+}));
 ```
 
 ### Webhook Handling (Next.js)
 
 ```typescript
 // app/api/webhooks/square/route.ts
-import { createWebhookHandler } from '@bates-solutions/squareup/server';
+import { createNextWebhookHandler } from '@bates-solutions/squareup/server';
 
-const webhookHandler = createWebhookHandler({
+export const POST = createNextWebhookHandler({
   signatureKey: process.env.SQUARE_WEBHOOK_SIGNATURE_KEY!,
+  notificationUrl: 'https://example.com/api/webhooks/square',
+  handlers: {
+    'payment.updated': async (event) => {
+      console.log('Received event:', event.type);
+    },
+  },
 });
+```
 
-export async function POST(request: Request) {
-  const body = await request.text();
-  const signature = request.headers.get('x-square-hmacsha256-signature')!;
+### Custom Handling (`verifySignature` / `verifySignatureAsync`)
 
-  const event = webhookHandler.verifyAndParse(body, signature);
+On Node, `verifySignature` is synchronous (Node `crypto`). On an edge runtime,
+use `verifySignatureAsync` from `./server/web`: the same check with WebCrypto,
+returning a `Promise`.
 
-  // Handle the event
-  console.log('Received event:', event.type);
+```typescript
+import { verifySignature, parseWebhookEvent } from '@bates-solutions/squareup/server';
 
-  return new Response('OK', { status: 200 });
+const result = verifySignature(rawBody, signature, signatureKey, notificationUrl);
+if (!result.valid) {
+  return new Response(result.error, { status: 401 });
 }
+const event = parseWebhookEvent(rawBody);
+```
+
+```typescript
+// Edge
+import { verifySignatureAsync } from '@bates-solutions/squareup/server/web';
+
+const result = await verifySignatureAsync(rawBody, signature, signatureKey, notificationUrl);
 ```
 
 ### Typed Webhook Payloads
 
 ```typescript
 import type { PaymentWebhookEvent } from '@bates-solutions/squareup/server';
-import { getOrderId, getCustomerId } from '@bates-solutions/squareup/server';
+import { getOrderId, getCustomerId, parseWebhookEvent } from '@bates-solutions/squareup/server';
 
 // Cast to typed event for full payload types — no `as any` needed
-const event = webhookHandler.verifyAndParse(req) as PaymentWebhookEvent;
+const event = parseWebhookEvent(rawBody) as PaymentWebhookEvent;
 const payment = event.data.object.payment;
 console.log(payment.status, payment.amount_money);
 
@@ -279,13 +314,13 @@ All three follow one architecture, so the mental model transfers directly:
 - **Same client shape** — a `create<Vendor>Client({ ... })` factory returns a client exposing one readonly service per API domain (e.g. `client.customers`, `client.payments`).
 - **One service class per domain** (`src/core/services/<name>.service.ts`): input validation throws a `<Vendor>ValidationError`, every API call is wrapped `try/catch → parse<Vendor>Error`, mutating calls accept an `idempotencyKey`, and money is passed as integer minor units.
 - **Normalized error hierarchy** — a `<Vendor>Error` base with `…ApiError` / `…AuthError` / `…PaymentError` / `…ValidationError` subclasses and a single `parse<Vendor>Error` mapper.
-- **Standalone `./server` webhook module** — signature verification plus a typed handler-map dispatch, with adapters for **Express** and **AWS Lambda** (plus **Next.js** on stripe & squareup, and a framework-neutral **Web/edge** handler on stripe & clover).
+- **Standalone `./server` webhook module** — signature verification plus a typed handler-map dispatch, with adapters for **Express** and **AWS Lambda** (plus **Next.js** on stripe & squareup), and a framework-neutral **Web/edge** handler on all three.
 - **ESM + TypeScript source**, dual subpath exports (`.` for the client, `./server` for webhooks), Vitest tests against mocked I/O, and published to **JSR** via GitHub OIDC.
 
 The differences are only where the underlying platform forces them:
 
 - **stripe** wraps the official [`stripe`](https://www.npmjs.com/package/stripe) SDK (a peer dependency) and verifies webhooks with WebCrypto, so `./server` also runs on edge runtimes (Deno, Cloudflare Workers, Supabase Edge Functions).
-- **squareup** wraps the official [`square`](https://www.npmjs.com/package/square) SDK (a peer dependency) and verifies webhooks with Node's `crypto`.
+- **squareup** wraps the official [`square`](https://www.npmjs.com/package/square) SDK (a peer dependency) and verifies webhooks with Node's `crypto` in its Node adapters, plus a WebCrypto path (`./server/web`) for edge runtimes (Deno, Cloudflare Workers, Supabase Edge Functions).
 - **clover** ships no vendor SDK — it calls Clover over a small fetch-based REST client that targets both Clover hosts (Ecommerce and Platform) — and verifies webhooks with WebCrypto (edge-ready).
 
 ## Contributing

@@ -1,4 +1,4 @@
-import { createHash, randomUUID } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import type { CurrencyCode } from './types/index.js';
 
 /**
@@ -91,6 +91,9 @@ export function formatMoney(
 /**
  * Create a unique idempotency key for Square API requests
  *
+ * Uses `globalThis.crypto.randomUUID()`, available on Node 22+, Deno, Bun, and
+ * Cloudflare Workers.
+ *
  * @returns UUID string
  *
  * @example
@@ -100,7 +103,7 @@ export function formatMoney(
  * ```
  */
 export function createIdempotencyKey(): string {
-  return randomUUID();
+  return globalThis.crypto.randomUUID();
 }
 
 /** Shortest idempotency-key limit among the endpoints keys are derived for. */
