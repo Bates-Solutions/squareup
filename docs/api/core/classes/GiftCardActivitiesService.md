@@ -6,7 +6,7 @@
 
 # Class: GiftCardActivitiesService
 
-Defined in: [core/services/gift-cards.service.ts:256](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L256)
+Defined in: [core/services/gift-cards.service.ts:256](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L256)
 
 Service for managing gift card activities (the Gift Card Activities API).
 
@@ -34,7 +34,7 @@ await square.giftCards.activities.create({
 
 > **new GiftCardActivitiesService**(`client`, `defaultLocationId?`): `GiftCardActivitiesService`
 
-Defined in: [core/services/gift-cards.service.ts:257](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L257)
+Defined in: [core/services/gift-cards.service.ts:257](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L257)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [core/services/gift-cards.service.ts:257](https://github.com/mbates/
 
 > **create**(`options`): `Promise`\<[`GiftCardActivity`](../interfaces/GiftCardActivity.md)\>
 
-Defined in: [core/services/gift-cards.service.ts:269](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L269)
+Defined in: [core/services/gift-cards.service.ts:269](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L269)
 
 Create a gift card activity.
 
@@ -80,7 +80,7 @@ Always pass a stable key for retries to avoid double-applying activities
 
 > **list**(`options?`): `Promise`\<\{ `activities`: [`GiftCardActivity`](../interfaces/GiftCardActivity.md)[]; `cursor?`: `string`; \}\>
 
-Defined in: [core/services/gift-cards.service.ts:350](https://github.com/mbates/squareup/blob/main/src/core/services/gift-cards.service.ts#L350)
+Defined in: [core/services/gift-cards.service.ts:350](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/gift-cards.service.ts#L350)
 
 List gift card activities, optionally filtered by card, type, location,
 or time range.

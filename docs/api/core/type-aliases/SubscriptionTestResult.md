@@ -8,6 +8,6 @@
 
 > **SubscriptionTestResult** = `Square.SubscriptionTestResult`
 
-Defined in: [core/services/webhook-subscriptions.service.ts:26](https://github.com/mbates/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L26)
+Defined in: [core/services/webhook-subscriptions.service.ts:26](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/webhook-subscriptions.service.ts#L26)
 
 Result of sending a test event to a subscription.

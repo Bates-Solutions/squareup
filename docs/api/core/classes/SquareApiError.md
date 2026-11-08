@@ -6,7 +6,7 @@
 
 # Class: SquareApiError
 
-Defined in: [core/errors.ts:57](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L57)
+Defined in: [core/errors.ts:57](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L57)
 
 API-level errors from Square
 
@@ -20,7 +20,7 @@ API-level errors from Square
 
 > **new SquareApiError**(`message`, `code`, `statusCode`, `errors`): `SquareApiError`
 
-Defined in: [core/errors.ts:65](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L65)
+Defined in: [core/errors.ts:65](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L65)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [core/errors.ts:65](https://github.com/mbates/squareup/blob/main/src
 
 > `readonly` **code**: [`SquareErrorCode`](../type-aliases/SquareErrorCode.md)
 
-Defined in: [core/errors.ts:33](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L33)
+Defined in: [core/errors.ts:33](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L33)
 
 #### Inherited from
 
@@ -66,7 +66,7 @@ Defined in: [core/errors.ts:33](https://github.com/mbates/squareup/blob/main/src
 
 > `readonly` `optional` **details?**: `unknown`
 
-Defined in: [core/errors.ts:35](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L35)
+Defined in: [core/errors.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L35)
 
 #### Inherited from
 
@@ -78,7 +78,7 @@ Defined in: [core/errors.ts:35](https://github.com/mbates/squareup/blob/main/src
 
 > `readonly` **errors**: `object`[]
 
-Defined in: [core/errors.ts:58](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L58)
+Defined in: [core/errors.ts:58](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L58)
 
 #### category
 
@@ -102,7 +102,7 @@ Defined in: [core/errors.ts:58](https://github.com/mbates/squareup/blob/main/src
 
 > `readonly` `optional` **statusCode?**: `number`
 
-Defined in: [core/errors.ts:34](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L34)
+Defined in: [core/errors.ts:34](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L34)
 
 #### Inherited from
 

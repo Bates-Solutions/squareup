@@ -6,7 +6,7 @@
 
 # Interface: WebhookEvent\<T\>
 
-Defined in: [server/types.ts:74](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L74)
+Defined in: [server/types.ts:74](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L74)
 
 Base webhook event structure
 
@@ -22,7 +22,7 @@ Base webhook event structure
 
 > **created\_at**: `string`
 
-Defined in: [server/types.ts:82](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L82)
+Defined in: [server/types.ts:82](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L82)
 
 When the event was created
 
@@ -32,7 +32,7 @@ When the event was created
 
 > **data**: `object`
 
-Defined in: [server/types.ts:84](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L84)
+Defined in: [server/types.ts:84](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L84)
 
 Event data payload
 
@@ -60,7 +60,7 @@ Type of object in the event
 
 > **event\_id**: `string`
 
-Defined in: [server/types.ts:76](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L76)
+Defined in: [server/types.ts:76](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L76)
 
 Unique ID for this event
 
@@ -70,7 +70,7 @@ Unique ID for this event
 
 > **merchant\_id**: `string`
 
-Defined in: [server/types.ts:78](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L78)
+Defined in: [server/types.ts:78](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L78)
 
 Merchant ID that triggered the event
 
@@ -80,6 +80,6 @@ Merchant ID that triggered the event
 
 > **type**: [`WebhookEventType`](../type-aliases/WebhookEventType.md)
 
-Defined in: [server/types.ts:80](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L80)
+Defined in: [server/types.ts:80](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L80)
 
 Type of event

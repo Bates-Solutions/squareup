@@ -6,7 +6,7 @@
 
 # Interface: SearchRecentOrdersOptions
 
-Defined in: [core/types/index.ts:220](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L220)
+Defined in: [core/types/index.ts:220](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L220)
 
 Simplified options for searching recent orders
 
@@ -16,7 +16,7 @@ Simplified options for searching recent orders
 
 > `optional` **cursor?**: `string`
 
-Defined in: [core/types/index.ts:226](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L226)
+Defined in: [core/types/index.ts:226](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L226)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [core/types/index.ts:226](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **limit?**: `number`
 
-Defined in: [core/types/index.ts:225](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L225)
+Defined in: [core/types/index.ts:225](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L225)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [core/types/index.ts:225](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **locationIds?**: `string`[]
 
-Defined in: [core/types/index.ts:221](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L221)
+Defined in: [core/types/index.ts:221](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L221)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/types/index.ts:221](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **since?**: `Date`
 
-Defined in: [core/types/index.ts:223](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L223)
+Defined in: [core/types/index.ts:223](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L223)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [core/types/index.ts:223](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **states?**: `OrderState`[]
 
-Defined in: [core/types/index.ts:222](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L222)
+Defined in: [core/types/index.ts:222](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L222)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [core/types/index.ts:222](https://github.com/mbates/squareup/blob/ma
 
 > `optional` **until?**: `Date`
 
-Defined in: [core/types/index.ts:224](https://github.com/mbates/squareup/blob/main/src/core/types/index.ts#L224)
+Defined in: [core/types/index.ts:224](https://github.com/Bates-Solutions/squareup/blob/main/src/core/types/index.ts#L224)

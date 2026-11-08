@@ -46,6 +46,6 @@ See also the [Quick Reference](./api-reference.md) for a summary of all exports.
 
 ## Additional Resources
 
-- [GitHub Repository](https://github.com/mbates/squareup)
+- [GitHub Repository](https://github.com/Bates-Solutions/squareup)
 - [Square Developer Documentation](https://developer.squareup.com/docs)
 - [Changelog](../CHANGELOG.md)

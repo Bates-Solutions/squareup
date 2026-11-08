@@ -8,7 +8,7 @@
 
 > **ExpressNextFunction** = (`err?`) => `void`
 
-Defined in: [server/middleware/express.ts:39](https://github.com/mbates/squareup/blob/main/src/server/middleware/express.ts#L39)
+Defined in: [server/middleware/express.ts:39](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/express.ts#L39)
 
 Minimal structural stand-in for the Express `NextFunction`.
 

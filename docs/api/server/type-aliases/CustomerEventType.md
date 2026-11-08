@@ -8,4 +8,4 @@
 
 > **CustomerEventType** = `"customer.created"` \| `"customer.updated"` \| `"customer.deleted"`
 
-Defined in: [server/types.ts:20](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L20)
+Defined in: [server/types.ts:20](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L20)

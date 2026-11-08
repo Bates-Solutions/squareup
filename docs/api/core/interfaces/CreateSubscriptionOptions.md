@@ -6,7 +6,7 @@
 
 # Interface: CreateSubscriptionOptions
 
-Defined in: [core/services/subscriptions.service.ts:109](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L109)
+Defined in: [core/services/subscriptions.service.ts:109](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L109)
 
 Options for creating a subscription.
 
@@ -20,7 +20,7 @@ phases drive product-based billing from order templates.
 
 > `optional` **cardId?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:122](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L122)
+Defined in: [core/services/subscriptions.service.ts:122](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L122)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [core/services/subscriptions.service.ts:122](https://github.com/mbat
 
 > **customerId**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:110](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L110)
+Defined in: [core/services/subscriptions.service.ts:110](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L110)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [core/services/subscriptions.service.ts:110](https://github.com/mbat
 
 > `optional` **idempotencyKey?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:126](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L126)
+Defined in: [core/services/subscriptions.service.ts:126](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L126)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [core/services/subscriptions.service.ts:126](https://github.com/mbat
 
 > `optional` **locationId?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:120](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L120)
+Defined in: [core/services/subscriptions.service.ts:120](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L120)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [core/services/subscriptions.service.ts:120](https://github.com/mbat
 
 > `optional` **phases?**: [`SubscriptionPhaseInput`](SubscriptionPhaseInput.md)[]
 
-Defined in: [core/services/subscriptions.service.ts:119](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L119)
+Defined in: [core/services/subscriptions.service.ts:119](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L119)
 
 Ordered list of billing phases. Each phase references an order template
 that defines the line items billed during that phase.
@@ -63,7 +63,7 @@ that defines the line items billed during that phase.
 
 > `optional` **planVariationId?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:114](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L114)
+Defined in: [core/services/subscriptions.service.ts:114](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L114)
 
 Plan variation ID. Required when `phases` is omitted.
 
@@ -73,7 +73,7 @@ Plan variation ID. Required when `phases` is omitted.
 
 > `optional` **priceOverride?**: `number`
 
-Defined in: [core/services/subscriptions.service.ts:124](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L124)
+Defined in: [core/services/subscriptions.service.ts:124](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L124)
 
 ***
 
@@ -81,7 +81,7 @@ Defined in: [core/services/subscriptions.service.ts:124](https://github.com/mbat
 
 > `optional` **startDate?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:121](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L121)
+Defined in: [core/services/subscriptions.service.ts:121](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L121)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [core/services/subscriptions.service.ts:121](https://github.com/mbat
 
 > `optional` **taxPercentage?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:125](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L125)
+Defined in: [core/services/subscriptions.service.ts:125](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L125)
 
 ***
 
@@ -97,4 +97,4 @@ Defined in: [core/services/subscriptions.service.ts:125](https://github.com/mbat
 
 > `optional` **timezone?**: `string`
 
-Defined in: [core/services/subscriptions.service.ts:123](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L123)
+Defined in: [core/services/subscriptions.service.ts:123](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L123)

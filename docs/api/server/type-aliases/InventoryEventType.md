@@ -8,4 +8,4 @@
 
 > **InventoryEventType** = `"inventory.count.updated"`
 
-Defined in: [server/types.ts:47](https://github.com/mbates/squareup/blob/main/src/server/types.ts#L47)
+Defined in: [server/types.ts:47](https://github.com/Bates-Solutions/squareup/blob/main/src/server/types.ts#L47)

@@ -6,7 +6,7 @@
 
 # Class: SquareNetworkError
 
-Defined in: [core/errors.ts:121](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L121)
+Defined in: [core/errors.ts:121](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L121)
 
 The request never got an HTTP response: a connection failure (DNS, reset,
 `fetch failed`) or a client-side timeout. Square may or may not have
@@ -25,7 +25,7 @@ such as an OAuth `client_secret` are not exposed.
 
 > **new SquareNetworkError**(`message`, `code`, `options?`): `SquareNetworkError`
 
-Defined in: [core/errors.ts:124](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L124)
+Defined in: [core/errors.ts:124](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L124)
 
 #### Parameters
 
@@ -57,7 +57,7 @@ Defined in: [core/errors.ts:124](https://github.com/mbates/squareup/blob/main/sr
 
 > `readonly` **code**: `"NETWORK_ERROR"` \| `"TIMEOUT"`
 
-Defined in: [core/errors.ts:122](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L122)
+Defined in: [core/errors.ts:122](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L122)
 
 #### Overrides
 
@@ -69,7 +69,7 @@ Defined in: [core/errors.ts:122](https://github.com/mbates/squareup/blob/main/sr
 
 > `readonly` `optional` **details?**: `unknown`
 
-Defined in: [core/errors.ts:35](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L35)
+Defined in: [core/errors.ts:35](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L35)
 
 #### Inherited from
 
@@ -81,7 +81,7 @@ Defined in: [core/errors.ts:35](https://github.com/mbates/squareup/blob/main/src
 
 > `readonly` `optional` **statusCode?**: `number`
 
-Defined in: [core/errors.ts:34](https://github.com/mbates/squareup/blob/main/src/core/errors.ts#L34)
+Defined in: [core/errors.ts:34](https://github.com/Bates-Solutions/squareup/blob/main/src/core/errors.ts#L34)
 
 #### Inherited from
 

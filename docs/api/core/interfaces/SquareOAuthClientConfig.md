@@ -6,7 +6,7 @@
 
 # Interface: SquareOAuthClientConfig
 
-Defined in: [core/oauth.ts:138](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L138)
+Defined in: [core/oauth.ts:138](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L138)
 
 Configuration for [SquareOAuthClient](../classes/SquareOAuthClient.md). Uses the application's
 credentials, not a merchant access token.
@@ -17,7 +17,7 @@ credentials, not a merchant access token.
 
 > **clientId**: `string`
 
-Defined in: [core/oauth.ts:140](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L140)
+Defined in: [core/oauth.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L140)
 
 Application ID
 
@@ -27,7 +27,7 @@ Application ID
 
 > **clientSecret**: `string`
 
-Defined in: [core/oauth.ts:142](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L142)
+Defined in: [core/oauth.ts:142](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L142)
 
 Application secret (Developer Console → OAuth). Never logged or put in errors.
 
@@ -37,7 +37,7 @@ Application secret (Developer Console → OAuth). Never logged or put in errors.
 
 > `optional` **environment?**: [`SquareEnvironment`](../type-aliases/SquareEnvironment.md)
 
-Defined in: [core/oauth.ts:144](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L144)
+Defined in: [core/oauth.ts:144](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L144)
 
 #### Default
 

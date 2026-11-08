@@ -8,7 +8,7 @@
 
 > **createNextPagesWebhookHandler**(`config`): (`req`, `res`) => `Promise`\<`void`\>
 
-Defined in: [server/middleware/nextjs.ts:140](https://github.com/mbates/squareup/blob/main/src/server/middleware/nextjs.ts#L140)
+Defined in: [server/middleware/nextjs.ts:140](https://github.com/Bates-Solutions/squareup/blob/main/src/server/middleware/nextjs.ts#L140)
 
 Create a Next.js Pages Router API handler
 

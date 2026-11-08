@@ -8,6 +8,6 @@
 
 > **SubscriptionStatus** = `"PENDING"` \| `"ACTIVE"` \| `"CANCELED"` \| `"DEACTIVATED"` \| `"PAUSED"`
 
-Defined in: [core/services/subscriptions.service.ts:9](https://github.com/mbates/squareup/blob/main/src/core/services/subscriptions.service.ts#L9)
+Defined in: [core/services/subscriptions.service.ts:9](https://github.com/Bates-Solutions/squareup/blob/main/src/core/services/subscriptions.service.ts#L9)
 
 Subscription status types

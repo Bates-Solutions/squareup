@@ -8,7 +8,7 @@
 
 > **buildAuthorizeUrl**(`options`): `string`
 
-Defined in: [core/oauth.ts:110](https://github.com/mbates/squareup/blob/main/src/core/oauth.ts#L110)
+Defined in: [core/oauth.ts:110](https://github.com/Bates-Solutions/squareup/blob/main/src/core/oauth.ts#L110)
 
 Build the URL that sends a seller to Square to authorize your application
 (OAuth code flow). Pure function — no network call.
