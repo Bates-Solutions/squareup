@@ -4,7 +4,6 @@ import {
   processWebhookEvent,
   SIGNATURE_HEADER,
 } from '../webhook.js';
-import { createWebhookHandler } from './web.js';
 import type { WebhookConfig, WebhookEvent } from '../types.js';
 
 /**
@@ -43,10 +42,6 @@ interface NextPagesResponse {
 /**
  * Create a Next.js App Router webhook handler
  *
- * Delegates to the framework-neutral {@link createWebhookHandler}, so it
- * answers exactly like it (405 for non-POST, 401 for a missing or invalid
- * signature, 500 when a handler throws).
- *
  * @param config - Webhook configuration
  * @returns Route handler for POST requests
  *
@@ -71,8 +66,50 @@ interface NextPagesResponse {
 export function createNextWebhookHandler(
   config: WebhookConfig
 ): (request: Request) => Promise<Response> {
-  // The App Router speaks the Web platform, so reuse the framework-neutral handler.
-  return createWebhookHandler(config);
+  return async (request: Request): Promise<Response> => {
+    try {
+      // Get raw body
+      const rawBody = await request.text();
+
+      // Get signature from headers
+      const signature = request.headers.get(SIGNATURE_HEADER);
+      if (!signature) {
+        return Response.json(
+          { error: 'Missing signature header' },
+          { status: 401 }
+        );
+      }
+
+      // Verify signature
+      const verification = verifySignature(
+        rawBody,
+        signature,
+        config.signatureKey,
+        config.notificationUrl
+      );
+
+      if (!verification.valid) {
+        return Response.json(
+          { error: verification.error },
+          { status: 401 }
+        );
+      }
+
+      // Parse and process event
+      const event = parseWebhookEvent(rawBody);
+      await processWebhookEvent(event, config);
+
+      return Response.json(
+        { received: true, eventId: event.event_id },
+        { status: 200 }
+      );
+    } catch (error) {
+      return Response.json(
+        { error: error instanceof Error ? error.message : 'Webhook processing failed' },
+        { status: 500 }
+      );
+    }
+  };
 }
 
 /**
@@ -126,7 +163,7 @@ export function createNextPagesWebhookHandler(
       }
 
       // Verify signature
-      const verification = await verifySignature(
+      const verification = verifySignature(
         rawBody,
         signature,
         config.signatureKey,
@@ -214,7 +251,7 @@ export async function parseNextWebhook(
     throw new Error('Missing signature header');
   }
 
-  const verification = await verifySignature(
+  const verification = verifySignature(
     rawBody,
     signature,
     signatureKey,

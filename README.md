@@ -27,7 +27,7 @@ Stop wrestling with Square's low-level APIs. **squareup** gives you a simplified
 - **Simplified APIs** - Less boilerplate, more productivity
 - **Type-Safe** - Full TypeScript support with strict types
 - **Fluent Builders** - Chainable order and payment construction
-- **Webhook Support** - WebCrypto signature verification, plus adapters for Express, Next.js, AWS Lambda, and a framework-neutral Web/edge handler (Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
+- **Webhook Support** - Signature verification plus adapters for Express, Next.js, AWS Lambda, and a framework-neutral Web/edge handler (Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
 - **OAuth** - Authorize URL, code exchange, refresh, revoke and token status for multi-tenant apps ([guide](./docs/guides/core/oauth.md))
 - **Service Classes** - Payments, Orders, Customers, Customer Groups, Catalog (incl. pricing rules and subscription plan listing), Inventory, Subscriptions, Invoices, Loyalty, Gift Cards
 
@@ -82,7 +82,8 @@ JSR's npm tarball ships with `exports` only (no legacy `main`/`types`). Set your
 `@bates-solutions/squareup/server` re-exports every helper — signature
 verification, the typed dispatcher, and the Web, Express, Next.js, and Lambda
 adapters. Framework adapters are **also** available as their own subpaths, so a
-Lambda or Next.js app never pulls Express's types (or vice versa):
+Lambda or Next.js app never pulls Express's types (or vice versa). On an edge
+runtime, import from `./server/web`: it pulls in no Node built-in.
 
 ```ts
 import { createWebhookHandler }        from '@bates-solutions/squareup/server/web';
@@ -149,8 +150,8 @@ exact URL registered on your webhook subscription.
 ### Webhook Handling (Edge: Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
 
 `createWebhookHandler` takes a standard `Request` and returns a standard
-`Response`, using only Web APIs and WebCrypto, so it runs on any Fetch API
-runtime:
+`Response`. It verifies with WebCrypto and uses only Web APIs, so it runs on any
+Fetch API runtime:
 
 ```typescript
 import { createWebhookHandler } from '@bates-solutions/squareup/server/web';
@@ -208,18 +209,27 @@ export const POST = createNextWebhookHandler({
 });
 ```
 
-### Custom Handling (`verifySignature`)
+### Custom Handling (`verifySignature` / `verifySignatureAsync`)
 
-`verifySignature` is async (it uses WebCrypto), so `await` it:
+On Node, `verifySignature` is synchronous (Node `crypto`). On an edge runtime,
+use `verifySignatureAsync` from `./server/web`: the same check with WebCrypto,
+returning a `Promise`.
 
 ```typescript
 import { verifySignature, parseWebhookEvent } from '@bates-solutions/squareup/server';
 
-const result = await verifySignature(rawBody, signature, signatureKey, notificationUrl);
+const result = verifySignature(rawBody, signature, signatureKey, notificationUrl);
 if (!result.valid) {
   return new Response(result.error, { status: 401 });
 }
 const event = parseWebhookEvent(rawBody);
+```
+
+```typescript
+// Edge
+import { verifySignatureAsync } from '@bates-solutions/squareup/server/web';
+
+const result = await verifySignatureAsync(rawBody, signature, signatureKey, notificationUrl);
 ```
 
 ### Typed Webhook Payloads
@@ -310,7 +320,7 @@ All three follow one architecture, so the mental model transfers directly:
 The differences are only where the underlying platform forces them:
 
 - **stripe** wraps the official [`stripe`](https://www.npmjs.com/package/stripe) SDK (a peer dependency) and verifies webhooks with WebCrypto, so `./server` also runs on edge runtimes (Deno, Cloudflare Workers, Supabase Edge Functions).
-- **squareup** wraps the official [`square`](https://www.npmjs.com/package/square) SDK (a peer dependency) and verifies webhooks with WebCrypto, so `./server` also runs on edge runtimes (Deno, Cloudflare Workers, Supabase Edge Functions).
+- **squareup** wraps the official [`square`](https://www.npmjs.com/package/square) SDK (a peer dependency) and verifies webhooks with Node's `crypto` in its Node adapters, plus a WebCrypto path (`./server/web`) for edge runtimes (Deno, Cloudflare Workers, Supabase Edge Functions).
 - **clover** ships no vendor SDK — it calls Clover over a small fetch-based REST client that targets both Clover hosts (Ecommerce and Platform) — and verifies webhooks with WebCrypto (edge-ready).
 
 ## Contributing

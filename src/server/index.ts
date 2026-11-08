@@ -100,8 +100,9 @@ export {
   getCustomerId,
 } from './webhook.js';
 
-// Framework-neutral (edge/Deno/Workers) handler
+// Framework-neutral (edge/Deno/Workers) handler and WebCrypto verification
 export { createWebhookHandler } from './middleware/web.js';
+export { verifySignatureAsync } from './webcrypto.js';
 
 // Express middleware
 export {

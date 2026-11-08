@@ -6,7 +6,7 @@ This guide covers handling Square webhooks with `@bates-solutions/squareup`.
 
 - Square account with webhook configured
 - Webhook signature key from Square Developer Dashboard
-- A server runtime: Node.js 22+ (Express, Next.js, Lambda) or any Fetch API runtime (Deno, Supabase Edge Functions, Cloudflare Workers, Bun). Verification uses WebCrypto, so no Node built-in is needed
+- A server runtime: Node.js 22+ (Express, Next.js, Lambda) or any Fetch API runtime (Deno, Supabase Edge Functions, Cloudflare Workers, Bun) via `./server/web`
 
 ## Overview
 
@@ -31,9 +31,9 @@ import {
 } from '@bates-solutions/squareup/server';
 
 // Verify and parse a webhook
-async function handleWebhook(rawBody: string, signature: string) {
-  // 1. Verify signature (async: WebCrypto)
-  const result = await verifySignature(
+function handleWebhook(rawBody: string, signature: string) {
+  // 1. Verify signature
+  const result = verifySignature(
     rawBody,
     signature,
     process.env.SQUARE_WEBHOOK_KEY!
@@ -62,18 +62,16 @@ async function handleWebhook(rawBody: string, signature: string) {
 
 ## Signature Verification
 
-Square signs every webhook request using HMAC-SHA256 over `notificationUrl + rawBody`. Always verify signatures to ensure requests are authentic.
-
-`verifySignature` computes the digest with WebCrypto (`globalThis.crypto.subtle`), so it runs on Node 22+, Deno, Bun, and Cloudflare Workers. WebCrypto is promise-based, so `verifySignature` returns a `Promise` and must be awaited.
+Square signs every webhook request using HMAC-SHA256. Always verify signatures to ensure requests are authentic.
 
 ```typescript
 import { verifySignature } from '@bates-solutions/squareup/server';
 
-const result = await verifySignature(
+const result = verifySignature(
   rawBody,              // Raw request body as string
   signature,            // From x-square-hmacsha256-signature header
   signatureKey,         // Your webhook signature key
-  notificationUrl       // The URL registered on the subscription (Square signs it)
+  notificationUrl       // Optional: URL for additional verification
 );
 
 if (!result.valid) {
@@ -82,23 +80,32 @@ if (!result.valid) {
 }
 ```
 
+### Edge runtimes: `verifySignatureAsync`
+
+`verifySignature` uses Node's `crypto`. On Deno, Supabase Edge Functions,
+Cloudflare Workers or Bun, use `verifySignatureAsync` from
+`@bates-solutions/squareup/server/web` instead. It runs the same check with
+WebCrypto (`globalThis.crypto.subtle`) and a constant-time compare, returns the
+same result shape, and is async because WebCrypto is promise-based.
+`./server/web` imports no Node built-in.
+
+```typescript
+import { verifySignatureAsync, parseWebhookEvent } from '@bates-solutions/squareup/server/web';
+
+const result = await verifySignatureAsync(rawBody, signature, signatureKey, notificationUrl);
+if (!result.valid) {
+  return Response.json({ error: result.error }, { status: 401 });
+}
+const event = parseWebhookEvent(rawBody);
+```
+
+For a complete handler, see `createWebhookHandler` in the
+[middleware guide](./middleware.md#web--edge-handler).
+
 ### Security Notes
 
 - The signature key is found in Square Developer Dashboard > Webhooks
-- Always use timing-safe comparison (the library handles this with a constant-time compare, no Node built-in)
-
-### Migrating from 2.x synchronous `verifySignature`
-
-Before this change `verifySignature` and `parseAndVerifyWebhook` returned their result directly. They now return a `Promise`. Code that called them directly needs an `await`:
-
-```typescript
-// before
-const result = verifySignature(rawBody, signature, key);
-// after
-const result = await verifySignature(rawBody, signature, key);
-```
-
-Without the `await`, `result.valid` is `undefined` and every request looks invalid (TypeScript flags this). The bundled adapters (`createWebhookHandler`, Express, Next.js, Lambda, `createWebhookProcessor`) already await it, so code that only uses them needs no change.
+- Always use timing-safe comparison (the library handles this)
 - Verify before parsing to prevent processing malicious payloads
 - Use HTTPS for your webhook endpoint
 
@@ -258,7 +265,7 @@ Combine verification and parsing in one step:
 import { parseAndVerifyWebhook } from '@bates-solutions/squareup/server';
 
 try {
-  const { event, rawBody, signature } = await parseAndVerifyWebhook(
+  const { event, rawBody, signature } = parseAndVerifyWebhook(
     rawBody,
     signature,
     process.env.SQUARE_WEBHOOK_KEY!
@@ -411,7 +418,7 @@ const { rawBody, signature } = createMockWebhook(
   'test-signature-key'
 );
 
-const result = await verifySignature(rawBody, signature, 'test-signature-key');
+const result = verifySignature(rawBody, signature, 'test-signature-key');
 expect(result.valid).toBe(true);
 ```
 

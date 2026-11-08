@@ -1,8 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createWebhookHandler } from '../web.js';
-import { createNextWebhookHandler } from '../nextjs.js';
-import { SIGNATURE_HEADER } from '../../webhook.js';
+import { SIGNATURE_HEADER } from '../../events.js';
+import * as web from '../web.js';
+import * as server from '../../index.js';
 
 const KEY = 'test-signature-key';
 const URL_ = 'https://edge.example/webhook';
@@ -182,33 +183,32 @@ describe('createWebhookHandler (edge)', () => {
     expect(await res.json()).toEqual({ error: 'Webhook processing failed' });
   });
 
-  it('uses only Web APIs (no Node imports)', () => {
-    const source = readFileSync(new URL('../web.ts', import.meta.url), 'utf8');
-    expect(source).not.toMatch(/from ['"]node:/);
-    expect(source).not.toMatch(/Buffer/);
+  it('imports no Node built-in, directly or through its relative imports', () => {
+    const seen = new Set<string>();
+    const visit = (url: URL): void => {
+      if (seen.has(url.href)) return;
+      seen.add(url.href);
+      const source = readFileSync(url, 'utf8');
+      expect(source, url.pathname).not.toMatch(/from ['"](node:|crypto['"]|fs['"]|buffer['"])/);
+      expect(source, url.pathname).not.toMatch(/\bBuffer\./);
+      for (const m of source.matchAll(/from ['"](\.{1,2}\/[^'"]+)\.js['"]/g)) {
+        visit(new URL(`${m[1]}.ts`, url));
+      }
+    };
+    visit(new URL('../web.ts', import.meta.url));
+
+    expect([...seen].map((u) => u.split('/src/server/')[1]).sort()).toEqual([
+      'events.ts',
+      'middleware/web.ts',
+      'types.ts',
+      'webcrypto.ts',
+    ]);
   });
-});
 
-describe('createNextWebhookHandler delegates to createWebhookHandler', () => {
-  it('rejects non-POST with 405 like the Web handler', async () => {
-    const webhook = createNextWebhookHandler({ signatureKey: KEY, handlers: {} });
-
-    const res = await webhook(request(BODY, undefined, 'GET'));
-
-    expect(res.status).toBe(405);
-  });
-
-  it('verifies and dispatches', async () => {
-    const handler = vi.fn();
-    const webhook = createNextWebhookHandler({
-      signatureKey: KEY,
-      notificationUrl: URL_,
-      handlers: { 'payment.updated': handler },
-    });
-
-    const res = await webhook(request(BODY, await sign(BODY)));
-
-    expect(res.status).toBe(200);
-    expect(handler).toHaveBeenCalledOnce();
+  it('re-exports the Node-free helpers from ./server/web', () => {
+    expect(web.verifySignatureAsync).toBe(server.verifySignatureAsync);
+    expect(web.parseWebhookEvent).toBe(server.parseWebhookEvent);
+    expect(web.processWebhookEvent).toBe(server.processWebhookEvent);
+    expect(web.SIGNATURE_HEADER).toBe('x-square-hmacsha256-signature');
   });
 });

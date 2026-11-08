@@ -157,7 +157,7 @@ export function createLambdaWebhookHandler(
       };
     }
 
-    const verification = await verifySignature(
+    const verification = verifySignature(
       rawBody,
       signature,
       config.signatureKey,

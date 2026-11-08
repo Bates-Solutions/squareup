@@ -1,16 +1,17 @@
-import {
-  verifySignature,
-  parseWebhookEvent,
-  processWebhookEvent,
-  SIGNATURE_HEADER,
-} from '../webhook.js';
+// Only Node-free modules here: this file is the `./server/web` entry point.
+import { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent } from '../events.js';
+import { verifySignatureAsync } from '../webcrypto.js';
 import type { WebhookConfig } from '../types.js';
+
+export { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent, verifySignatureAsync };
 
 /**
  * Create a framework-neutral webhook handler built on the Web platform.
  *
  * Takes a standard `Request` and returns a standard `Response`, using only Web
- * APIs (`request.text()`, WebCrypto verification, `Response.json`). It runs
+ * APIs (`request.text()`, WebCrypto verification via
+ * {@link verifySignatureAsync}, `Response.json`). Neither this module nor
+ * anything it imports uses a Node built-in. It runs
  * unchanged on any runtime that speaks the Fetch API: Deno (`Deno.serve`),
  * Supabase Edge Functions, Cloudflare Workers, Bun, Vercel/Netlify edge, and
  * the Next.js App Router.
@@ -77,7 +78,7 @@ export function createWebhookHandler(
         return Response.json({ error: 'Missing signature header' }, { status: 401 });
       }
 
-      const verification = await verifySignature(
+      const verification = await verifySignatureAsync(
         rawBody,
         signature,
         config.signatureKey,

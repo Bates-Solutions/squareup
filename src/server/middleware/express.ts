@@ -145,7 +145,7 @@ export function createExpressWebhookHandler(
       }
 
       // Verify signature
-      const verification = await verifySignature(
+      const verification = verifySignature(
         rawBody,
         signature,
         webhookConfig.signatureKey,

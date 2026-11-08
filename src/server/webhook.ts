@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import type {
   WebhookConfig,
   WebhookEvent,
@@ -6,58 +7,13 @@ import type {
   PaymentWebhookObject,
   RefundWebhookObject,
 } from './types.js';
+import { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent } from './events.js';
 
-/**
- * Header name for Square webhook signature
- */
-export const SIGNATURE_HEADER = 'x-square-hmacsha256-signature';
-
-/**
- * Compute an HMAC-SHA256 base64 digest using WebCrypto.
- *
- * Uses `globalThis.crypto.subtle` so verification runs on any modern runtime
- * (Node 22+, Deno, Bun, Cloudflare Workers) with no Node built-ins.
- */
-async function hmacSha256Base64(key: string, payload: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const cryptoKey = await globalThis.crypto.subtle.importKey(
-    'raw',
-    encoder.encode(key),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign']
-  );
-  const digest = await globalThis.crypto.subtle.sign('HMAC', cryptoKey, encoder.encode(payload));
-  let binary = '';
-  for (const byte of new Uint8Array(digest)) {
-    binary += String.fromCharCode(byte);
-  }
-  return btoa(binary);
-}
-
-/**
- * Constant-time comparison of two strings.
- *
- * Pure JS (no `node:crypto`) so it works on edge runtimes. Returns `false` for
- * unequal lengths or empty input without comparing characters.
- */
-function timingSafeEqualString(a: string, b: string): boolean {
-  if (a.length !== b.length || a.length === 0) {
-    return false;
-  }
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i++) {
-    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return mismatch === 0;
-}
+// Defined in the Node-free events module so the edge entry point can share them.
+export { SIGNATURE_HEADER, parseWebhookEvent, processWebhookEvent };
 
 /**
  * Verify a Square webhook signature using HMAC-SHA256
- *
- * Computes the digest with WebCrypto (`globalThis.crypto.subtle`), so it needs
- * no Node built-in and runs on Node 22+, Deno, Bun, and Cloudflare Workers.
- * Because WebCrypto is promise-based, this function is async: `await` it.
  *
  * @param rawBody - The raw request body as a string
  * @param signature - The signature from the x-square-hmacsha256-signature header
@@ -69,7 +25,7 @@ function timingSafeEqualString(a: string, b: string): boolean {
  * ```typescript
  * import { verifySignature } from '@bates-solutions/squareup/server';
  *
- * const result = await verifySignature(
+ * const result = verifySignature(
  *   rawBody,
  *   req.headers['x-square-hmacsha256-signature'],
  *   process.env.SQUARE_WEBHOOK_KEY!
@@ -80,12 +36,12 @@ function timingSafeEqualString(a: string, b: string): boolean {
  * }
  * ```
  */
-export async function verifySignature(
+export function verifySignature(
   rawBody: string,
   signature: string,
   signatureKey: string,
   notificationUrl?: string
-): Promise<WebhookVerificationResult> {
+): WebhookVerificationResult {
   if (!rawBody) {
     return { valid: false, error: 'Missing request body' };
   }
@@ -103,10 +59,23 @@ export async function verifySignature(
     // Square uses: notificationUrl + rawBody (if URL provided) or just rawBody
     const stringToSign = notificationUrl ? notificationUrl + rawBody : rawBody;
 
-    const expectedSignature = await hmacSha256Base64(signatureKey, stringToSign);
+    // Generate HMAC-SHA256 signature
+    const expectedSignature = createHmac('sha256', signatureKey)
+      .update(stringToSign)
+      .digest('base64');
 
-    // Constant-time comparison to prevent timing attacks
-    if (!timingSafeEqualString(signature, expectedSignature)) {
+    // Use timing-safe comparison to prevent timing attacks
+    const signatureBuffer = Buffer.from(signature, 'base64');
+    const expectedBuffer = Buffer.from(expectedSignature, 'base64');
+
+    // Buffers must be same length for timingSafeEqual
+    if (signatureBuffer.length !== expectedBuffer.length) {
+      return { valid: false, error: 'Invalid signature' };
+    }
+
+    const isValid = timingSafeEqual(signatureBuffer, expectedBuffer);
+
+    if (!isValid) {
       return { valid: false, error: 'Invalid signature' };
     }
 
@@ -116,27 +85,6 @@ export async function verifySignature(
       valid: false,
       error: error instanceof Error ? error.message : 'Signature verification failed',
     };
-  }
-}
-
-/**
- * Parse a webhook request body into a typed event
- *
- * @param rawBody - The raw request body string
- * @returns Parsed webhook event
- * @throws Error if parsing fails
- *
- * @example
- * ```typescript
- * const event = parseWebhookEvent(rawBody);
- * console.log(event.type); // 'payment.completed'
- * ```
- */
-export function parseWebhookEvent(rawBody: string): WebhookEvent {
-  try {
-    return JSON.parse(rawBody) as WebhookEvent;
-  } catch {
-    throw new Error('Invalid webhook payload: failed to parse JSON');
   }
 }
 
@@ -152,20 +100,20 @@ export function parseWebhookEvent(rawBody: string): WebhookEvent {
  *
  * @example
  * ```typescript
- * const { event } = await parseAndVerifyWebhook(
+ * const { event } = parseAndVerifyWebhook(
  *   rawBody,
  *   signature,
  *   process.env.SQUARE_WEBHOOK_KEY!
  * );
  * ```
  */
-export async function parseAndVerifyWebhook(
+export function parseAndVerifyWebhook(
   rawBody: string,
   signature: string,
   signatureKey: string,
   notificationUrl?: string
-): Promise<ParsedWebhookRequest> {
-  const verification = await verifySignature(rawBody, signature, signatureKey, notificationUrl);
+): ParsedWebhookRequest {
+  const verification = verifySignature(rawBody, signature, signatureKey, notificationUrl);
 
   if (!verification.valid) {
     throw new Error(verification.error ?? 'Signature verification failed');
@@ -178,36 +126,6 @@ export async function parseAndVerifyWebhook(
     signature,
     event,
   };
-}
-
-/**
- * Process a webhook event by calling the appropriate handler
- *
- * @param event - The parsed webhook event
- * @param config - Webhook configuration with handlers
- * @returns Promise that resolves when handler completes
- *
- * @example
- * ```typescript
- * await processWebhookEvent(event, {
- *   signatureKey: process.env.SQUARE_WEBHOOK_KEY!,
- *   handlers: {
- *     'payment.created': async (event) => {
- *       console.log('Payment created:', event.data.id);
- *     },
- *   },
- * });
- * ```
- */
-export async function processWebhookEvent(
-  event: WebhookEvent,
-  config: WebhookConfig
-): Promise<void> {
-  const handler = config.handlers[event.type];
-
-  if (handler) {
-    await handler(event);
-  }
 }
 
 /**
@@ -242,7 +160,7 @@ export function createWebhookProcessor(
     signature: string
   ): Promise<{ success: boolean; event?: WebhookEvent; error?: string }> => {
     try {
-      const verification = await verifySignature(
+      const verification = verifySignature(
         rawBody,
         signature,
         config.signatureKey,

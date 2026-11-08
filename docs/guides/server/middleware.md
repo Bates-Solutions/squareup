@@ -29,10 +29,11 @@ barrel and carries no framework dependency.
 ## Web / Edge Handler
 
 `createWebhookHandler(config)` returns `(request: Request) => Promise<Response>`.
-It uses only Web APIs (`request.text()`, WebCrypto, `Response.json`), so the same
-handler runs on Deno, Supabase Edge Functions, Cloudflare Workers, Bun,
-Vercel/Netlify edge and the Next.js App Router. Import it from the
-`./server/web` subpath to keep the Node-only adapters out of an edge bundle.
+It verifies with `verifySignatureAsync` (WebCrypto) and uses only Web APIs
+(`request.text()`, `Response.json`), so the same handler runs on Deno, Supabase
+Edge Functions, Cloudflare Workers, Bun and Vercel/Netlify edge. Import it from
+the `./server/web` subpath: that entry point imports no Node built-in, while the
+`./server` barrel also loads the Node adapters.
 
 ```typescript
 // supabase/functions/square-webhook/index.ts
@@ -69,9 +70,10 @@ Responses: `405` for a non-POST method, `401` for a missing or invalid
 signature, `500` when the body is not JSON or a handler throws, and `200` with
 `{ received: true, eventId }` after the handler has run.
 
-The Express, Next.js Pages Router and Lambda adapters below stay Node-targeted
-(they read `Buffer`s and Node streams). `createNextWebhookHandler` (App Router)
-delegates to `createWebhookHandler`.
+`./server/web` also exports `verifySignatureAsync`, `parseWebhookEvent`,
+`processWebhookEvent` and `SIGNATURE_HEADER` for custom edge handling. The
+Express, Next.js and Lambda adapters below are unchanged and keep using the
+synchronous, Node `crypto` based `verifySignature`.
 
 ## Express Middleware
 
@@ -398,8 +400,8 @@ export default async function handler(
   const rawBody = await getRawBody(req);
   const signature = req.headers[SIGNATURE_HEADER] as string;
 
-  // Verify signature (async: WebCrypto)
-  const verification = await verifySignature(
+  // Verify signature
+  const verification = verifySignature(
     rawBody,
     signature,
     process.env.SQUARE_WEBHOOK_KEY!
@@ -471,7 +473,7 @@ The middleware returns standard error responses:
 |--------|--------|
 | 200 | Success |
 | 401 | Missing/invalid signature |
-| 405 | Wrong HTTP method (Web handler, App Router, Pages Router) |
+| 405 | Wrong HTTP method (Web handler, Pages Router) |
 | 500 | Handler error |
 
 ## Testing Locally
