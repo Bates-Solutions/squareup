@@ -304,7 +304,7 @@ const updated = await square.orders.update('ORDER_123', {
 });
 ```
 
-The update is sparse: only the fields you pass change. `version` must be the order's current version; Square rejects a stale one, so read the order first and retry on a version error.
+The update is sparse: only the fields you pass change. `version` must be the order's current version; Square rejects a stale one, so read the order first. On a version error, re-read the order and send the update again with the new `version` and a **new** `idempotencyKey`. Reuse a key only to resend the identical request (after a timeout, say); Square rejects a reused key with a different body.
 
 ### Fulfillments
 

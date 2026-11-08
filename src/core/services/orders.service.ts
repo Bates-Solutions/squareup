@@ -4,11 +4,29 @@ import type {
   CurrencyCode,
   SearchOrdersOptions,
   SearchRecentOrdersOptions,
+  UpdateOrderFulfillmentInput,
   UpdateOrderOptions,
 } from '../types/index.js';
 import { assertNoResponseErrors, parseSquareError, SquareValidationError } from '../errors.js';
 import { createIdempotencyKey } from '../utils.js';
 import { OrderBuilder, type Order } from '../builders/order.builder.js';
+
+/**
+ * Only the writable shipment fields, by name: a caller's object may carry
+ * Square-stamped ones (`shippedAt`, `placedAt`…) that must not be sent.
+ */
+function writableShipment(
+  d: NonNullable<UpdateOrderFulfillmentInput['shipmentDetails']>
+): NonNullable<UpdateOrderFulfillmentInput['shipmentDetails']> {
+  return compact({
+    carrier: d.carrier,
+    shippingType: d.shippingType,
+    shippingNote: d.shippingNote,
+    trackingNumber: d.trackingNumber,
+    trackingUrl: d.trackingUrl,
+    expectedShippedAt: d.expectedShippedAt,
+  });
+}
 
 /** A copy without the undefined keys, so a sparse update sends only what was set. */
 function compact<T extends object>(value: T): T {
@@ -166,8 +184,10 @@ export class OrdersService {
    *
    * @param orderId - Order ID to update
    * @param updates - The order's current `version`, and the fields to change.
-   *   Pass `idempotencyKey` and reuse it when retrying so Square deduplicates
-   *   the request.
+   *   Pass `idempotencyKey` and reuse it when resending the identical request
+   *   (say, after a timeout) so Square deduplicates it. After re-reading the
+   *   order for a new `version`, use a new key: Square rejects a reused key
+   *   with a different body.
    * @param locationId - Override the client's default location
    * @returns Updated order
    *
@@ -217,7 +237,7 @@ export class OrdersService {
       return compact({
         uid: f.uid,
         state: f.state,
-        shipmentDetails: f.shipmentDetails ? compact({ ...f.shipmentDetails }) : undefined,
+        shipmentDetails: f.shipmentDetails ? writableShipment(f.shipmentDetails) : undefined,
       });
     });
 
@@ -229,7 +249,7 @@ export class OrdersService {
           version: updates.version,
           referenceId: updates.referenceId,
           state: updates.state,
-          fulfillments,
+          fulfillments: fulfillments?.length ? fulfillments : undefined,
         }),
         ...(updates.fieldsToClear?.length ? { fieldsToClear: updates.fieldsToClear } : {}),
         idempotencyKey: updates.idempotencyKey ?? createIdempotencyKey(),

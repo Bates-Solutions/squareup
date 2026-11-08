@@ -353,6 +353,30 @@ describe('OrdersService', () => {
       ]);
     });
 
+    it('sends only the writable shipment fields, not Square-stamped ones', async () => {
+      const { client, service } = updated();
+      const details = {
+        carrier: 'Canada Post',
+        shippedAt: '2026-11-07T10:00:00Z',
+        placedAt: '2026-11-06T10:00:00Z',
+      };
+      await service.update('ORDER_123', {
+        version: 3,
+        fulfillments: [{ uid: 'FUL_1', shipmentDetails: details }],
+      });
+
+      expect(sent(client).order.fulfillments).toStrictEqual([
+        { uid: 'FUL_1', shipmentDetails: { carrier: 'Canada Post' } },
+      ]);
+    });
+
+    it('leaves out an empty fulfillments list', async () => {
+      const { client, service } = updated();
+      await service.update('ORDER_123', { version: 3, fulfillments: [] });
+
+      expect(sent(client).order).not.toHaveProperty('fulfillments');
+    });
+
     it('changes a fulfillment state without shipment details', async () => {
       const { client, service } = updated();
       await service.update('ORDER_123', {

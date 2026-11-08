@@ -226,7 +226,10 @@ export interface UpdateOrderOptions {
    * `'fulfillments[FULFILLMENT_UID].shipment_details.tracking_url'`.
    */
   fieldsToClear?: string[];
-  /** Reuse it when retrying so Square deduplicates the request. */
+  /**
+   * Reuse it only when resending the identical request; a retry with a new
+   * `version` needs a new key.
+   */
   idempotencyKey?: string;
 }
 
