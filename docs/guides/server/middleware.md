@@ -1,6 +1,6 @@
 # Framework Middleware
 
-This guide covers webhook middleware for Express and Next.js with `@bates-solutions/squareup`.
+This guide covers webhook adapters for Web/edge runtimes, Express, Next.js and AWS Lambda with `@bates-solutions/squareup`.
 
 ## Import paths
 
@@ -11,6 +11,7 @@ never drags Express's types into its type-check, and vice versa:
 
 | Adapter | Barrel | Dedicated subpath |
 | --- | --- | --- |
+| Web / edge | `@bates-solutions/squareup/server` | `@bates-solutions/squareup/server/web` |
 | Express | `@bates-solutions/squareup/server` | `@bates-solutions/squareup/server/express` |
 | Next.js | `@bates-solutions/squareup/server` | `@bates-solutions/squareup/server/nextjs` |
 | Lambda  | `@bates-solutions/squareup/server` | `@bates-solutions/squareup/server/lambda` |
@@ -23,7 +24,54 @@ barrel and carries no framework dependency.
 
 - Square account with webhook configured
 - Webhook signature key from Square Developer Dashboard
-- Express or Next.js application
+- Express or Next.js application, or a Fetch API runtime (Deno, Supabase Edge Functions, Cloudflare Workers, Bun)
+
+## Web / Edge Handler
+
+`createWebhookHandler(config)` returns `(request: Request) => Promise<Response>`.
+It uses only Web APIs (`request.text()`, WebCrypto, `Response.json`), so the same
+handler runs on Deno, Supabase Edge Functions, Cloudflare Workers, Bun,
+Vercel/Netlify edge and the Next.js App Router. Import it from the
+`./server/web` subpath to keep the Node-only adapters out of an edge bundle.
+
+```typescript
+// supabase/functions/square-webhook/index.ts
+import { createWebhookHandler } from 'jsr:@bates-solutions/squareup/server/web';
+
+Deno.serve(createWebhookHandler({
+  signatureKey: Deno.env.get('SQUARE_WEBHOOK_KEY')!,
+  // Square signs notificationUrl + body: use the exact subscription URL
+  notificationUrl: 'https://example.supabase.co/functions/v1/square-webhook',
+  handlers: {
+    'payment.updated': async (event) => {
+      console.log('Payment updated:', event.data.id);
+    },
+  },
+}));
+```
+
+```typescript
+// Cloudflare Workers
+import { createWebhookHandler } from '@bates-solutions/squareup/server/web';
+
+export default {
+  fetch(request: Request, env: { SQUARE_WEBHOOK_KEY: string }) {
+    return createWebhookHandler({
+      signatureKey: env.SQUARE_WEBHOOK_KEY,
+      notificationUrl: 'https://example.com/webhook',
+      handlers: {},
+    })(request);
+  },
+};
+```
+
+Responses: `405` for a non-POST method, `401` for a missing or invalid
+signature, `500` when the body is not JSON or a handler throws, and `200` with
+`{ received: true, eventId }` after the handler has run.
+
+The Express, Next.js Pages Router and Lambda adapters below stay Node-targeted
+(they read `Buffer`s and Node streams). `createNextWebhookHandler` (App Router)
+delegates to `createWebhookHandler`.
 
 ## Express Middleware
 
@@ -350,8 +398,8 @@ export default async function handler(
   const rawBody = await getRawBody(req);
   const signature = req.headers[SIGNATURE_HEADER] as string;
 
-  // Verify signature
-  const verification = verifySignature(
+  // Verify signature (async: WebCrypto)
+  const verification = await verifySignature(
     rawBody,
     signature,
     process.env.SQUARE_WEBHOOK_KEY!
@@ -423,7 +471,7 @@ The middleware returns standard error responses:
 |--------|--------|
 | 200 | Success |
 | 401 | Missing/invalid signature |
-| 405 | Wrong HTTP method (Pages Router) |
+| 405 | Wrong HTTP method (Web handler, App Router, Pages Router) |
 | 500 | Handler error |
 
 ## Testing Locally

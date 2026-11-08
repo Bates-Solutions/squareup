@@ -4,6 +4,7 @@
   "exports": {
     ".": "./src/core/index.ts",
     "./server": "./src/server/index.ts",
+    "./server/web": "./src/server/middleware/web.ts",
     "./server/express": "./src/server/middleware/express.ts",
     "./server/nextjs": "./src/server/middleware/nextjs.ts",
     "./server/lambda": "./src/server/middleware/lambda.ts"
