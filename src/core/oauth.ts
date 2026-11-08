@@ -102,7 +102,7 @@ export interface BuildAuthorizeUrlOptions {
  *   clientId: process.env.SQUARE_APP_ID!,
  *   environment: 'production',
  *   scopes: ['ORDERS_READ', 'MERCHANT_PROFILE_READ'],
- *   state: csrfToken,
+ *   state: csrfToken, // random per attempt; store it server side to check in the callback
  * });
  * // redirect the seller to `url`
  * ```
@@ -197,7 +197,9 @@ export interface OAuthTokenStatus {
  *   environment: 'production',
  * });
  *
- * // In the redirect handler, after verifying `state`
+ * // In the redirect handler, after verifying `state`: require a stored value,
+ * // delete it (one use), then compare it with the query value.
+ * // See docs/guides/core/oauth.md.
  * const tokens = await oauth.obtainToken({ code });
  * ```
  */

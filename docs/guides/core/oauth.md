@@ -25,7 +25,8 @@ const oauth = createSquareOAuthClient({
 ## 1. Send the seller to Square
 
 ```typescript
-const state = crypto.randomUUID(); // store it, e.g. in the session, with the tenant ID
+const state = crypto.randomUUID();
+req.session.oauthState = state; // store it server side, e.g. in the session, with the tenant ID
 
 const url = buildAuthorizeUrl({
   clientId: process.env.SQUARE_APP_ID!,
@@ -45,10 +46,17 @@ Request every scope your integration calls. A missing scope only shows up at run
 
 ## 2. Exchange the code
 
-Square redirects to your callback with `code` and `state`. Check that `state` matches what you stored, then exchange the code. The code is valid for 5 minutes.
+Square redirects to your callback with `code` and `state`. Check `state` before exchanging the code. The code is valid for 5 minutes.
 
 ```typescript
-if (req.query.state !== storedState) throw new Error('OAuth state mismatch');
+// Take the stored state and delete it, so each value works only once
+const storedState = req.session.oauthState;
+delete req.session.oauthState;
+
+if (!storedState) throw new Error('OAuth state missing: start the flow again');
+if (typeof req.query.state !== 'string' || req.query.state !== storedState) {
+  throw new Error('OAuth state mismatch');
+}
 
 const tokens = await oauth.obtainToken({ code: req.query.code });
 // {
@@ -65,6 +73,12 @@ Store the tokens per merchant, encrypted at rest. Then call the API as that merc
 ```typescript
 const square = createSquareClient({ accessToken: tokens.accessToken, environment: 'production' });
 ```
+
+The state check is what stops a cross-site request forgery: an attacker sending your user to the callback with the attacker's own `code`. Its order matters:
+
+- **Require a stored state.** A plain `req.query.state !== storedState` passes when both are `undefined`: a callback with no `state`, in a session that never started the flow. Reject when nothing is stored.
+- **Use it once.** Delete the stored value before comparing, whether or not the check passes, so a captured callback URL can't be replayed.
+- **Then compare.** The query value must be a string equal to the stored one.
 
 If the authorize URL included `redirectUri`, pass the same value to `obtainToken({ code, redirectUri })`.
 
