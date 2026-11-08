@@ -61,7 +61,7 @@ const item = await square.catalog.createItem({
   variations: [
     { name: 'Small', price: 400, sku: 'LATTE-S' },
     { name: 'Medium', price: 500, sku: 'LATTE-M' },
-    { name: 'Large', price: 600, sku: 'LATTE-L' },
+    { name: 'Large', price: 600, sku: 'LATTE-L', upc: '012345678905' }, // upc: barcode
   ],
 });
 
@@ -127,6 +127,24 @@ for (const item of items) {
   console.log(item.itemData?.name);
 }
 ```
+
+### Find Variations by Barcode or SKU
+
+Match variations on their UPC or SKU, exact and case insensitive, without listing the whole catalog. It pages through every match and returns the parent items too.
+
+```typescript
+const { variations, items } = await square.catalog.findVariationsByCode({
+  upcs: ['012345678905', '036000291452'],
+  skus: ['PICKLE-DILL-500'],
+});
+
+for (const v of variations) {
+  const item = items.find((i) => i.id === v.itemVariationData?.itemId);
+  console.log(item?.itemData?.name, v.itemVariationData?.upc, v.itemVariationData?.sku);
+}
+```
+
+Give at least one code; blanks and repeats are dropped. Long lists are sent 250 values per request, Square's limit. A variation matched by both its UPC and its SKU appears once.
 
 ### Get All Categories
 

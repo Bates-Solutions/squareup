@@ -124,6 +124,8 @@ export interface CatalogObject {
     itemId?: string;
     name?: string;
     sku?: string;
+    /** Universal product code (barcode). Searchable with `findVariationsByCode()`. */
+    upc?: string;
     priceMoney?: {
       amount?: bigint;
       currency?: string;
@@ -165,6 +167,8 @@ export interface CreateCatalogItemOptions {
     price: number;
     currency?: CurrencyCode;
     sku?: string;
+    /** Universal product code (barcode). Square validates the format. */
+    upc?: string;
   }>;
   idempotencyKey?: string;
 }
@@ -243,6 +247,28 @@ export interface WholesalePricingResult {
   productSet: CatalogObject;
   discount: CatalogObject;
 }
+
+/**
+ * Codes to look up with `catalog.findVariationsByCode()`. Matching is exact and
+ * case insensitive; give either list, or both.
+ */
+export interface FindVariationsByCodeOptions {
+  upcs?: string[];
+  skus?: string[];
+}
+
+/**
+ * Result of `catalog.findVariationsByCode()`.
+ */
+export interface FindVariationsByCodeResult {
+  /** Matching `ITEM_VARIATION` objects, each once. */
+  variations: CatalogObject[];
+  /** Their parent `ITEM` objects, each once. */
+  items: CatalogObject[];
+}
+
+/** Square's limit on values in one `setQuery`. */
+const MAX_SET_QUERY_VALUES = 250;
 
 /**
  * Options for searching the catalog
@@ -328,6 +354,7 @@ export class CatalogService {
                 itemId,
                 name: v.name,
                 sku: v.sku,
+                upc: v.upc,
                 pricingType: 'FIXED_PRICING' as const,
                 priceMoney: {
                   amount: BigInt(v.price),
@@ -803,6 +830,79 @@ export class CatalogService {
         data: (response.objects ?? []) as CatalogObject[],
         cursor: response.cursor,
       };
+    } catch (error) {
+      throw parseSquareError(error);
+    }
+  }
+
+  /**
+   * Find item variations by UPC (barcode) or SKU, without listing the whole
+   * catalog. Pages through every match, and returns the parent items too.
+   *
+   * @param options - UPCs and/or SKUs to match (exact, case insensitive)
+   * @returns The matching variations and their parent items
+   *
+   * @example
+   * ```typescript
+   * const { variations, items } = await square.catalog.findVariationsByCode({
+   *   upcs: ['012345678905'],
+   *   skus: ['PICKLE-DILL-500'],
+   * });
+   * for (const v of variations) {
+   *   const item = items.find((i) => i.id === v.itemVariationData?.itemId);
+   *   console.log(item?.itemData?.name, v.itemVariationData?.upc);
+   * }
+   * ```
+   */
+  async findVariationsByCode(
+    options: FindVariationsByCodeOptions
+  ): Promise<FindVariationsByCodeResult> {
+    const clean = (values?: string[]) => [
+      ...new Set((values ?? []).map((v) => v.trim()).filter(Boolean)),
+    ];
+    const lookups = (
+      [
+        ['upc', clean(options.upcs)],
+        ['sku', clean(options.skus)],
+      ] as const
+    ).filter(([, values]) => values.length > 0);
+    if (lookups.length === 0) {
+      throw new SquareValidationError('Give at least one UPC or SKU', 'upcs');
+    }
+
+    const variations = new Map<string, CatalogObject>();
+    const items = new Map<string, CatalogObject>();
+
+    try {
+      for (const [attributeName, values] of lookups) {
+        for (let i = 0; i < values.length; i += MAX_SET_QUERY_VALUES) {
+          const attributeValues = values.slice(i, i + MAX_SET_QUERY_VALUES);
+          let cursor: string | undefined;
+          do {
+            const response = await this.client.catalog.search({
+              objectTypes: ['ITEM_VARIATION'],
+              query: { setQuery: { attributeName, attributeValues } },
+              includeRelatedObjects: true,
+              cursor,
+            });
+            assertNoResponseErrors(response);
+
+            for (const obj of response.objects ?? []) {
+              if (obj.type === 'ITEM_VARIATION') {
+                variations.set(obj.id, obj as CatalogObject);
+              }
+            }
+            for (const obj of response.relatedObjects ?? []) {
+              if (obj.type === 'ITEM') {
+                items.set(obj.id, obj as CatalogObject);
+              }
+            }
+            cursor = response.cursor;
+          } while (cursor);
+        }
+      }
+
+      return { variations: [...variations.values()], items: [...items.values()] };
     } catch (error) {
       throw parseSquareError(error);
     }

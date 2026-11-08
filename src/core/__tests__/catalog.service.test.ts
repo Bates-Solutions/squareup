@@ -22,6 +22,25 @@ function createMockClient(overrides: Record<string, unknown> = {}): SquareClient
 
 describe('CatalogService', () => {
   describe('createItem', () => {
+    it('sends each variation\'s UPC', async () => {
+      const upsert = vi.fn().mockResolvedValue({ catalogObject: { id: 'ITEM_1', type: 'ITEM' } });
+      const client = createMockClient({ object: { upsert, get: vi.fn(), delete: vi.fn() } });
+      const service = new CatalogService(client);
+
+      await service.createItem({
+        name: 'Dill pickles',
+        variations: [{ name: '500 ml', price: 1200, sku: 'DILL-500', upc: '012345678905' }],
+      });
+
+      const sent = upsert.mock.calls[0][0] as {
+        object: { itemData: { variations: { itemVariationData: Record<string, unknown> }[] } };
+      };
+      expect(sent.object.itemData.variations[0].itemVariationData).toMatchObject({
+        sku: 'DILL-500',
+        upc: '012345678905',
+      });
+    });
+
     it('should create an item with variations', async () => {
       const mockCatalogObject = { id: 'ITEM_123', type: 'ITEM' };
       const client = createMockClient({
@@ -496,6 +515,118 @@ describe('CatalogService', () => {
       const service = new CatalogService(client);
 
       await expect(service.search()).rejects.toThrow();
+    });
+  });
+
+  describe('findVariationsByCode', () => {
+    const variation = (id: string, itemId: string) => ({
+      type: 'ITEM_VARIATION',
+      id,
+      itemVariationData: { itemId },
+    });
+    const item = (id: string) => ({ type: 'ITEM', id });
+    const searchOf = (client: SquareClient) => vi.mocked(client.catalog.search);
+
+    it('finds variations by UPC with one setQuery, and returns the parent items', async () => {
+      const client = createMockClient({
+        search: vi.fn().mockResolvedValue({
+          objects: [variation('VAR_1', 'ITEM_1')],
+          relatedObjects: [item('ITEM_1'), { type: 'CATEGORY', id: 'CAT_1' }],
+        }),
+      });
+      const service = new CatalogService(client);
+
+      const result = await service.findVariationsByCode({ upcs: [' 012345678905 '] });
+
+      expect(searchOf(client)).toHaveBeenCalledTimes(1);
+      expect(searchOf(client)).toHaveBeenCalledWith({
+        objectTypes: ['ITEM_VARIATION'],
+        query: { setQuery: { attributeName: 'upc', attributeValues: ['012345678905'] } },
+        includeRelatedObjects: true,
+        cursor: undefined,
+      });
+      expect(result.variations.map((v) => v.id)).toEqual(['VAR_1']);
+      expect(result.items.map((i) => i.id)).toEqual(['ITEM_1']);
+    });
+
+    it('looks up UPCs and SKUs separately, and returns each variation once', async () => {
+      const client = createMockClient({
+        search: vi
+          .fn()
+          .mockResolvedValueOnce({
+            objects: [variation('VAR_1', 'ITEM_1')],
+            relatedObjects: [item('ITEM_1')],
+          })
+          .mockResolvedValueOnce({
+            objects: [variation('VAR_1', 'ITEM_1'), variation('VAR_2', 'ITEM_1')],
+            relatedObjects: [item('ITEM_1')],
+          }),
+      });
+      const service = new CatalogService(client);
+
+      const result = await service.findVariationsByCode({
+        upcs: ['012345678905'],
+        skus: ['PICKLE-1', 'PICKLE-1', ''],
+      });
+
+      const queries = searchOf(client).mock.calls.map((c) => c[0]?.query?.setQuery);
+      expect(queries).toEqual([
+        { attributeName: 'upc', attributeValues: ['012345678905'] },
+        { attributeName: 'sku', attributeValues: ['PICKLE-1'] },
+      ]);
+      expect(result.variations.map((v) => v.id)).toEqual(['VAR_1', 'VAR_2']);
+      expect(result.items.map((i) => i.id)).toEqual(['ITEM_1']);
+    });
+
+    it('follows the cursor to the last page', async () => {
+      const client = createMockClient({
+        search: vi
+          .fn()
+          .mockResolvedValueOnce({ objects: [variation('VAR_1', 'ITEM_1')], cursor: 'NEXT' })
+          .mockResolvedValueOnce({ objects: [variation('VAR_2', 'ITEM_2')] }),
+      });
+      const service = new CatalogService(client);
+
+      const result = await service.findVariationsByCode({ skus: ['A'] });
+
+      expect(searchOf(client)).toHaveBeenCalledTimes(2);
+      expect(searchOf(client).mock.calls[1][0]).toMatchObject({ cursor: 'NEXT' });
+      expect(result.variations.map((v) => v.id)).toEqual(['VAR_1', 'VAR_2']);
+    });
+
+    it('sends at most 250 values per search', async () => {
+      const client = createMockClient({ search: vi.fn().mockResolvedValue({}) });
+      const service = new CatalogService(client);
+      const upcs = Array.from({ length: 251 }, (_, i) => String(i).padStart(12, '0'));
+
+      await service.findVariationsByCode({ upcs });
+
+      const sizes = searchOf(client).mock.calls.map(
+        (c) => c[0]?.query?.setQuery?.attributeValues.length
+      );
+      expect(sizes).toEqual([250, 1]);
+    });
+
+    it('rejects an empty lookup without calling Square', async () => {
+      const client = createMockClient();
+      const service = new CatalogService(client);
+
+      await expect(service.findVariationsByCode({ upcs: [' '], skus: [] })).rejects.toThrow(
+        SquareValidationError
+      );
+      expect(searchOf(client)).not.toHaveBeenCalled();
+    });
+
+    it('throws when Square answers 2xx with errors', async () => {
+      const client = createMockClient({
+        search: vi.fn().mockResolvedValue({
+          objects: [],
+          errors: [{ category: 'INVALID_REQUEST_ERROR', code: 'BAD_REQUEST' }],
+        }),
+      });
+      const service = new CatalogService(client);
+
+      await expect(service.findVariationsByCode({ upcs: ['1'] })).rejects.toThrow();
     });
   });
 
