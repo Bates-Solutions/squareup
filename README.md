@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **This repository is archived.** `@bates-solutions/squareup` is now developed and released from [Bates-Solutions/payments](https://github.com/Bates-Solutions/payments/tree/main/packages/squareup), with its full history and tags. Report issues and open pull requests there. The package name and install command on [JSR](https://jsr.io/@bates-solutions/squareup) are unchanged, and the docs are at [bates-solutions.github.io/payments/squareup](https://bates-solutions.github.io/payments/squareup/).
+
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white&style=for-the-badge" alt="Node.js" height="28">
   &nbsp;&nbsp;&nbsp;&nbsp;
